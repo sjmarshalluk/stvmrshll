@@ -1,0 +1,583 @@
+* {
+  padding: 0;
+  margin: 0; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Schibsted Grotesk', Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+  font-smoothing: antialiased; 
+  color: #333;
+  background: #fff;
+  padding: 60px;
+}
+
+
+p,
+ul {
+  color: #333;
+  font-weight: 300; 
+  font-size: 22px;
+  line-height: 1.6;
+  width: 70%;
+  clear: both;
+}
+ol, ul {
+  list-style: none; }
+
+p a,
+ul a {
+  color: #333;
+  text-decoration: none; 
+  opacity: 0.2;
+}
+
+p span {
+  opacity: 0.2;
+  display: block;
+}
+
+.meta {
+  color: #AEABA3;
+  font-size: 14px;
+  padding: 0 0 1em;
+}
+
+
+hr {
+  margin-top: 100px;
+  opacity: 0;
+}
+
+
+img,
+video {
+  width: 100%; 
+  background-colors: rgba(255,255,255,0.05);
+  border-radius: 10px;
+}
+
+ul.nav {
+  line-height: 1;
+  width: 100%;
+}
+  ul.nav li {
+    padding: 0;
+    margin-right: 20px;
+      font-size: 14px;
+    float:left; }
+    ul.nav li.active {
+      opacity: 0.5;
+    }
+    ul.nav li.active a::before {
+      
+    }
+    ul.nav li a {
+      color: #333;
+      width: 100%;
+      padding: 0;
+      display: block;
+      border-bottom: none;
+      font-size: 14px;
+      opacity: 1;
+  border-bottom: 2px solid rgba(0, 0, 0, 0);
+}
+ul.nav li a:hover,
+ul.nav li a.active {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.8);
+  opacity: 1;
+}
+
+
+.header {
+  padding: 0;
+  margin-bottom: 70px;
+}
+.hero {
+  padding: 140px 100px 0;
+}
+.about {
+  padding: 140px 100px 140px;
+  width: 70%;
+}
+.about p,
+.about h2 {
+  margin-bottom: 40px;
+  width: 100%;
+}
+.footer {
+  padding: 200px 0 20px;
+}
+.footer ul.nav {
+  margin: 0;
+}
+.footer p {
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 60px;
+  width: 100%;
+  font-weight: 300;
+}
+h2 {
+  font-size: 36px;
+  font-weight: 400;
+}
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+p.caption {
+  font-size: 16px;
+  color: #ccc;
+  margin: -20px auto 40px!important;
+}
+
+ul.bullets li {
+  list-style-type: disc;
+  margin-left: 30px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+ul.numbers li {
+  list-style-type: decimal;
+  margin-left: 40px;
+  padding-left: 0px;
+  margin-bottom: 10px;
+}
+
+
+.content {
+  width: 100%;
+  padding: 100px 0;
+}
+.content p,
+.content h1,
+.content h2,
+.content h3,
+.content ol,
+.content ul {
+  width: 740px;
+  margin: 40px auto;
+  padding: 0;
+}
+.content h1 {
+  font-size: 60px;
+}
+.content h2 {
+  margin:80px auto 40px;
+}
+.content img {
+  margin-bottom: 40px;
+  margin-top: 40px;
+  width: calc(100% - 200px);
+  margin-left: 100px;
+  margin-right: 100px;
+}
+.content img.stack {
+  margin-bottom: 0;
+}
+.content img.sml {
+  width: 500px;
+  margin: 0 auto 40px;
+  display: block;
+}
+.content img.col {
+  width: 740px;
+  margin: 40px auto;
+  display: block;
+}
+.content img.big {
+  width: 1200px;
+  margin: 80px auto;
+  display: block;
+}
+.content img.bg {
+  background-color: #fbfbfb;
+  padding: 80px;
+}
+
+
+.content .imgs {
+  width: 50%;
+  margin: 0 auto 40px;
+}
+
+.content .imgs img.col1 {
+  width: calc(50% - 20px);
+  float: left;
+}
+.content .imgs img.col2 {
+  width: calc(50% - 20px);
+  float: right;
+}
+
+.content video.narrow {
+  width: 300px;
+  margin: 0 auto 40px;
+  display: block;
+}
+
+.content video.col {
+  width: 740px;
+  margin: 0 auto 40px;
+  display: block;
+}
+
+.project {
+  height: 650px;
+  border-radius: 20px;
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  padding: 100px;
+  position: relative;
+  margin: 0 100px 60px;
+}
+
+
+.project p {
+  width: 530px;
+  float: left;
+  color: #fff;
+  font-size: 40px;
+  opacity: 0.8;
+  line-height: 1.3;
+}
+
+.project p.cta {
+  position: absolute;
+  bottom: 0;
+  padding: 0 0 100px;
+  opacity: 1;
+  font-size: 12px;
+}
+
+.project a {
+  color: #333;
+  opacity: 0.8;
+  transition: 0.2s;
+  font-size: 14px;
+  background-color: #fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+}
+
+.project a:hover {
+  opacity: 1;
+}
+
+
+
+.project.bysm {
+  background-color: #2CC6B3;
+  background-image: url("../images/new/bysm.png");
+  background-size: 50%;
+  background-position: right -50px center;
+}
+.project.outside {
+  background-color: #25272B;
+  background-image: url("../images/outside/gaia-map.png");
+  background-size: cover;
+  background-position: right center;
+}
+.project.onboarding {
+  background-color: #25272B;
+  background-image: url("../images/outside/onboarding.png");
+  background-size: 60%;
+  background-position: right -150px center;
+}
+.project.dora {
+  background-color: #3678EA;
+  background-image: url("../images/new/dora1.png");
+  background-size: 45%;
+  background-position: right -50px center;
+  border-color: #3678EA;
+}
+.project.mapillary {
+  background-color: #333;
+  background-image: url("../images/new/mapillary.png");
+  background-size: 40%;
+  background-position: right 50px center;
+}
+.project.macmillan {
+  background-color: #A8B362;
+  background-image: url("../images/new/macmillan.png");
+  background-size: contain;
+  background-position: right bottom;
+}
+.project.spark {
+  background-color: #25272B;
+  background-image: url("../images/new/spark.png");
+  background-size: 50%;
+  background-position: right -80px center;
+}
+.project.capture {
+  background-color: #11100E;
+  background-image: url("../images/new/capture1.png");
+  background-size: 60%;
+  background-position: right -30px center;
+}
+
+.project.moo {
+  background-color: #333;
+  background-image: url("../images/new/moo.png");
+  background-size: 60%;
+  background-position: right -220px center;
+}
+
+
+.project.deskbeers,
+.project.designclub {
+  overflow: hidden;
+  position: relative;
+
+}
+
+
+.project.deskbeers p.cta,
+.project.designclub p.cta {
+  padding: 0;
+  z-index: 1;
+}
+
+.project-content {
+  position: relative;
+  height: 100%;
+}
+
+.project.deskbeers img,
+.project.designclub img {
+  opacity: 0.3;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+}
+
+.tags {
+  margin-bottom: 40px;
+  padding: 0;
+  opacity: 0.5;
+  font-size: 12px;
+  width: 100%;
+}
+
+.tags li {
+  display: inline-block;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 4px 8px;
+  margin-right: 10px;
+  color: #fff;
+}
+
+
+.testimonials {
+  padding: 100px 0 60px;
+  display: inline-block;
+}
+
+.testimonial {
+
+  text-align: left;
+  padding: 50px 50px 0 30px;
+  background: #f8f7f4;
+  border-radius: 10px;
+  height:300px;
+  position: relative;
+  margin-bottom: 0;
+  width: calc(25% - 30px);
+  margin-right: 40px;
+  float: left;
+}
+.testimonial:last-child {
+  margin-right: 0;
+}
+
+.testimonial blockquote {
+  font-style: italic;
+  font-size: 24px;
+  margin-top: 10px;
+  color: #AEABA3;
+  font-weight: 400;
+}
+.testimonial blockquote::before {
+  content: "“";
+  position: absolute;
+  top:0px;
+  left: 12px;
+  font-size: 60px;
+  color: #AEABA3;
+  opacity: 0.3;
+
+}
+.testimonial blockquote::after {
+  content: "”";
+  display: none;
+  position: absolute;
+  bottom:40px;
+  right: 30px;
+  font-size: 60px;
+  color: #ededed;
+}
+
+
+.testimonial cite {
+  font-size: 14px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  height: 60px;
+  padding: 20px 0 0 30px;
+  border-radius: 0 0 30px 30px;
+
+}
+
+.testimonial cite span {
+  font-weight: 600;
+}
+
+.testimonial cite span::after {
+  content: ", ";
+  font-weight: 400;
+}
+
+
+.values-list {
+  margin: 100px;
+}
+.value-item {
+  margin-bottom: 40px;
+}
+
+
+
+@media only screen and (max-width: 799px) {
+
+body {
+  padding: 20px;
+}
+
+.project {
+  padding: 40px; 
+} 
+.project p {
+  width: 100%;
+  font-size: 24px;
+}
+.project p.cta {
+  position: relative;
+  padding: 40px 0 0;
+}
+
+.project.capture {
+  background-position: center bottom 40px;
+  background-size: 90%;
+}
+.project.bysm {
+  background-size: 80%;
+  background-position: center bottom 40px;
+}
+
+.project.dora {
+  background-size: 80%;
+  background-position: center bottom 40px;
+}
+.project.mapillary {
+  background-size: 80%;
+  background-position: center bottom -40px;
+}
+.project.macmillan {
+  background-size: 80%;
+  background-position: center bottom 40px;
+}
+.project.spark {
+  background-size: 80%;
+  background-position: center bottom 40px;
+}
+.project.moo {
+  background-size: 80%;
+  background-position: center bottom 40px;
+}
+
+.project.deskbeers img,
+.project.designclub img {
+  object-fit: cover;
+  height: 650px;
+}
+
+.project.deskbeers p.cta,
+.project.designclub p.cta {
+  position: relative;
+  padding: 40px 0 0;
+}
+
+.hero {
+  padding: 0;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+.about {
+  padding: 60px 0;
+  width: 100%;
+}
+
+
+.testimonial {
+  width: 100%;
+  margin: 0 0 20px;
+}
+
+.values-list {
+  margin: 0;
+}
+.value-item {
+  margin-bottom: 20px;
+}
+
+
+}
+
+@media only screen and (max-width: 840px) {
+
+.content p,
+.content h1,
+.content h2,
+.content ol,
+.content ul {
+  width: 100%;
+}
+
+.content img.col, 
+.content video.col {
+  width: 100%;
+}
+
+.content img {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+}
+
+
+

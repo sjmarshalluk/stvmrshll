@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+  <head>
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQTC3NEETR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QQTC3NEETR');
+</script>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <title>Steve Marshall</title>
+    <link href="./stylesheets/site.css" rel="stylesheet" />
+
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="./images/favicon.png" rel="icon" type="image/png" />
+  </head>
+  <body>
+  
+
+<div class="header">
+    <ul class="nav">
+      <li><a href="index.html">← Back to all projects</a></li>
+      <li style="float: right;"><a href="mailto:stv@stvmrshll.com">stv@stvmrshll.com</a></li>
+    </ul>
+  </div>
+
+<img src="./images/dora/hero.png" alt="Hero" loading="lazy" />
+
+<div class="content">
+
+      <p class="meta">Meta | 2021</p>
+      <h1>Exploring mobile AR navigation to allow Meta employees to test new technologies</h1>
+
+      <p>While at Meta, I worked on several apps that were intended to allow staff to test emerging technologies. Although these products didn't possess the challenges that come with launching something publicly, they did come with their own unique problems as well as opportunities to try different solutions.</p>
+
+      <p>The goal of one app was to test out a new technology that uses 3D maps to provide hyper-accurate positioning. This technology is critical to the expansion of the Metaverse in ensuring AR assets can be positioned accurately within the real world. By creating an internal product, insights could be gathered on the current performance of the technology, as well as explore a potential future application of it.</p>
+
+
+
+      <h2>Mapping the flow</h2>
+
+      <p>Being an internal tool utilizing an emerging technology, the core of the design was not around the user needs, but instead around the state of tech. As such, the first challenge was to work with engineers to understand how the technology should work, and more importantly, what would happen when it didn't.</p>
+
+      <p>This collaboration allowed me to first define the states that could occur with the technology, and then map out these in isolation of any UX.</p>
+      <ul class="bullets">
+        <li>Available: 3D maps should be available based on GPS position</li>
+        <li>Unavailable: 3D maps not be available based on GPS position</li>
+        <li>(Re)localzing: the act of the device positioning itself within the 3D map</li>
+        <li>Active*: device positioned</li>
+        <li>Error: positioning lost (but retrying)</li>
+        <li>Failed: positioning lost and attempts to retry failed</li>
+      </ul>
+
+      <img src="./images/dora/vps-flow.png" alt="Hero" class="col" />
+
+      <p>Having established this and corroborated with the engineering teams, I was able to start mapping out the greater UX flow around it. This allowed us to start identifying areas that needed further investigation.</p>
+
+
+      <img src="./images/dora/vps-ux.png" alt="Hero" loading="lazy" />
+
+      <h2>Challenges of a global pandemic</h2>
+
+        <p>Working on this project during a global pandemic and not being able to meet up to be able to discuss the details of the technology added an extra challenge to overcome. As the tech was still being developed, we frequently found ourselves getting lost in abstract concepts.</p>
+
+        <p>To overcome this, I built a simulator using Mapbox and Mapillary JS to allow the team to remotely walk down a street together. This tool became central to our discussions and allowed us to align on the definitions above.</p>
+
+        <video width="50%" muted loop autoplay class="col">
+          <source src="./images/dora/dora-demo.mov" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+
+
+      
+
+
+      <h2>UX/UI Challenges</h2>
+
+      <p>Having mapped out the core flow, a key UX/UI challenge was identified: the user would likely switch between being camera-based to map-based throughout a journey (eg if the tech fails / a journey spans mapped and non-mapped areas).</p>
+
+      
+
+      <img src="./images/dora/camera-map.png" alt="Hero" style="padding: 0 100px" loading="lazy" class="col" />
+
+      <p>We had also already identified the user need of being able to choose which navigation solution they utilized (even though this was an internal tool for testing, we wanted to make it as usable as possible to maximize insights as well as help the company's understanding of mobile AR design).</p>
+
+      <p>While exploring potential solutions, the concept of an adaptive combined UI emerged that allowed for a seamless transition between the navigation methods. This concept was borne out of the observation that when a user is navigating using AR, they are holding the phone up; when navigating with a map, they are likely to hold the phone down.</p>
+
+
+      <div class="imgs">
+      <img src="./images/dora/look-down.png" loading="lazy" class="col1" />
+
+      <img src="./images/dora/look-up.png" loading="lazy" class="col2" />
+
+      </div>
+
+
+      <p>As this was a fairly novel solution that utilized intuitive movement, Figma mockups weren't enough to fully explore the concept. To determine whether an adaptive UI based on phone position would be intuitive or be confusing, I turned to javascript to be able to prototype this solution effectively. This allowed me to refine the concept, as well as allow the team to test out the UI for themselves (it used real data, so everyone could try it out themselves at their own location).</p>
+
+      <p>Although this took a little extra time, the benefits outweighed the costs. Giving the key stakeholders the ability to test it out themselves provided collective confidence in the solution, and that the extra implementation effort was worth it.  With this, I set out fleshing out the full UX/UI with high fidelity mockups.</p>
+
+      <video width="100%" muted loop autoplay class="narrow">
+        <source src="./images/dora/spatialxr-low.mov" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <hr/>
+
+      
+      <h2>Final UI</h2>
+
+      <p>With the prototype tested, I then refined the UI for the engineers to build. Whilst this was only an internal app, we wanted to make it feel as 'finished' as possible to encourage people to use it.</p>
+
+      <p>Although some aspects required bespoke design (eg to accommodate the custom interaction, and the loading iconography), existing design system components were utilized as much as possible. This helped reduce the engineering effort and opened up the possibility of any new patterns to be adopted by other teams.</p>
+
+
+
+      <img src="./images/dora/ui.png" alt="Hero" loading="lazy" />
+
+
+
+      <h2>Conclusion</h2>
+
+      <p>The work here not only allowed the engineering teams to gather data on the performance of their technology, but also added insights to the potential design solutions for future mobile AR apps. And even though this was an internal product (without full design resource allocated to do things "properly"), it was fun to have the opportunity to work with AR, and led me to design several other internal AR apps (also for testing out new technologies):</p>
+
+        <img src="./images/dora/ar-exp.png" alt="Hero" loading="lazy" class="col stack" />
+        <img src="./images/dora/explorer.png" alt="Hero" loading="lazy" class="col stack" />
+        <img src="./images/dora/xmas.png" alt="Hero" loading="lazy" class="col stack" />
+
+      
+
+
+</div>
+
+
+
+<div class="footer">
+  <p style="width:100%; text-align: center;"><a href="mailto:stv@stvmrshll.com">stv@stvmrshll.com</a></p>
+
+</div>
+
+  </body>
+</html>
