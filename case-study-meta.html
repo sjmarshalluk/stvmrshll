@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta VR Capture | stvmrshll</title>
+    <link rel="stylesheet" href="stylesheets/site.css">
+    <link href="./images/favicon.png" rel="icon" type="image/png" />
+</head>
+<body>
+
+    <main class="container">
+        <a href="index.html" class="nav-back">← Back to Index</a>
+
+        <header class="hero">
+            <h1>Automating Mixed-Reality Capture</h1>
+            <p style="font-size: 1.25rem; color: var(--text-secondary);">
+                Defining the interaction model for machine perception and automated environment scanning on Quest.
+            </p>
+        </header>
+
+        <div class="memo-meta">
+            <div class="meta-item">
+                <strong>Role</strong>
+                <span>Principal Product Designer</span>
+            </div>
+            <div class="meta-item">
+                <strong>Context</strong>
+                <span>Meta Quest Platform</span>
+            </div>
+            <div class="meta-item">
+                <strong>Outcome</strong>
+                <span>Meta Spatial Scanner SDK</span>
+            </div>
+        </div>
+
+        <section>
+            <h2>01 // The Challenge</h2>
+            <h3>Designing for Imperfect Eyes</h3>
+            <p>
+                Mixed Reality (MR) depends on the headset understanding the physics of the room. Early Quest devices relied on users manually "drawing" their walls—a high-friction process that resulted in poor data.
+            </p>
+            <p>
+                The business goal was "Automated Scanning," but the technology wasn't ready. The computer vision (SLAM) teams were struggling with reliability. They needed a design strategy that could handle the ambiguity of the real world: open floor plans, messy rooms, and occlusion.
+            </p>
+
+            <div class="figure-container">
+                <div class="figure-content">
+                  <img src="images/capture/room.png" alt="Key Requirements for MR Capture">
+                                    </div>
+                <div class="caption">
+                    FIG 01. DEFINING THE PHYSICS. Before designing UI, I aligned the engineering teams on the required output: watertight geometry for physics, semantic labels, and granular meshes for occlusion.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>02 // The System Model</h2>
+            <h3>The Hybrid Capture Model</h3>
+            
+            <div class="insight-box">
+                <span class="insight-label">The Strategy</span>
+                <p>
+                    "We couldn't rely on full automation because the tech wasn't mature. I defined a 'Human-in-the-Loop' model: The machine suggests the geometry, and the human confirms or corrects it."
+                </p>
+            </div>
+
+            <p>
+                I broke the capture process down into four distinct primitives, allowing us to mix and match manual vs. automated steps depending on the hardware generation:
+            </p>
+            <ol style="margin-left: 1.5rem; margin-bottom: 2rem; font-family: var(--font-sans); color: var(--text-secondary);">
+                <li><strong>Room Layout:</strong> (Walls, Ceiling, Floor)</li>
+                <li><strong>Architectural Features:</strong> (Windows, Doors)</li>
+                <li><strong>Object Volumes:</strong> (Couches, Tables - for collision)</li>
+                <li><strong>Object Meshes:</strong> (High fidelity visuals)</li>
+            </ol>
+
+            <div class="figure-container">
+                <div class="figure-content">
+                  <img src="images/capture/anatomy.png" alt="Key Requirements for MR Capture">
+                  
+                                    </div>
+                <div class="caption">
+                    FIG 02. THE COMPONENT MODEL. Breaking the environment down into layers allowed us to ship "Room Layout" first while "Object Detection" was still in R&D.
+                </div>
+            </div>
+
+            <h3>Designing for Failure</h3>
+            <p>
+                The most critical part of this work was not the "Happy Path," but the "Correction Path." What happens when the headset misses a wall? What happens if it thinks a couch is a table?
+            </p>
+            <p>
+                I designed a comprehensive fallback logic that allowed users to seamlessly take over when the algorithms failed.
+            </p>
+
+            <div class="figure-container">
+                <div class="figure-content">
+                  <img src="images/capture/complete2.png" alt="Key Requirements for MR Capture">
+                  
+                                    </div>
+                <div class="caption">
+                    FIG 03. THE FALLBACK LOGIC. A detailed flow mapping how the system degrades gracefully from "Auto-Detection" to "Manual Correction" without breaking the user's flow.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>03 // The Impact</h2>
+            <h3>From Experiment to SDK</h3>
+            <p>
+                This work moved environment capture from a research demo to a shipping platform capability.
+            </p>
+            <ul>
+                <li><strong>The Meta Spatial Scanner:</strong> The model I defined (Room → Planes → Objects) became the reference implementation for the <em>Meta Spatial Scanner</em>, now a core part of the Quest OS.</li>
+                <li><strong>Developer Standard:</strong> This framework is now embedded in the Spatial SDK, defining how thousands of third-party developers interact with user environments.</li>
+                <li><strong>Unblocking Progression:</strong> By providing an experieence that could handle "noisy" data, we enabled progression before the machine learning models were 100% perfect, ensuring Quest 3 could be launched on time.</li>
+            </ul>
+
+            <div class="figure-container">
+                <div class="figure-content">
+                  <img src="images/capture/mockups.png" alt="Key Requirements for MR Capture">
+                </div>
+                <div class="caption">
+                    FIG 04. PRODUCTION UI. The final shipping experience on Quest, utilizing the "Machine Suggests, Human Confirms" interaction pattern.
+                </div>
+            </div>
+            
+        </section>
+
+        <footer>
+            <a href="case-study-maps.html">← Previous: Maps Platform</a>
+            <a href="index.html">Back to Home</a>
+        </footer>
+
+    </main>
+</body>
+</html>
