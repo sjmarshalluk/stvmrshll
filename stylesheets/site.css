@@ -14,8 +14,9 @@
     --link-color: #111111;
     
     /* Typography */
-    --font-head: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-body: 'Libre Baskerville', 'Georgia', Times, serif;
+    --font-head: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Schibsted Grotesk', 'Georgia', Times, serif;
+    --font-mono: 'JetBrains Mono', monospace;
     
     /* Spacing Scale */
     --spacing-xs: 0.5rem;
@@ -49,7 +50,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    padding: var(--spacing-md);
 }
 
 /* --- 4. LAYOUT UTILITIES --- */
@@ -83,13 +83,14 @@ h1 {
 
 /* H2: Section Headers */
 h2 {
-    font-size: 1.125rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    border-bottom: 2px solid var(--text-primary);
+    border-bottom: 2px solid var(--accent-line);
     padding-bottom: 0.75rem;
     margin-top: var(--spacing-lg);
     margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
 }
 
 /* H3: Sub-sections */
@@ -176,6 +177,11 @@ a:hover {
     letter-spacing: 0.05em;
     margin-bottom: 0.5rem;
 }
+.hero p {
+  font-size: 2rem;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
 
 .hero-role {
     font-family: var(--font-head);
@@ -194,7 +200,7 @@ a:hover {
 }
 
 .tag {
-    font-family: var(--font-head);
+    font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
@@ -222,9 +228,9 @@ a:hover {
 }
 
 .cs-meta {
-    font-family: var(--font-head);
+    font-family: var(--font-mono);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -234,7 +240,7 @@ a:hover {
 
 .cs-title {
     font-family: var(--font-head);
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 0.75rem;
@@ -335,7 +341,7 @@ a:hover {
 
 /* 3. The Caption: Shrinks back to match the original text column */
 .figure-container.breakout .caption {
-    width: 76.92%; /* (100% / 1.3) = Pulls it back to original column width */
+    width: 66.67%; /* (100% / 1.3) = Pulls it back to original column width */
     margin: 1rem auto 0 auto; /* Centers the caption */
 }
 
@@ -367,7 +373,7 @@ a:hover {
 /* --- 10. FOOTER --- */
 footer {
     border-top: 2px solid var(--text-primary);
-    padding-top: 3rem;
+    padding: 3rem 0;
     margin-top: var(--spacing-xl);
     font-family: var(--font-head);
     font-size: 0.9rem;
@@ -414,4 +420,109 @@ footer {
     .figure-container.breakout .caption {
         width: 100%;
     }
+}
+
+
+
+#sticky-sentinel {
+    position: absolute;
+    top: 0rem; /* Matches the 'top' value of the sticky nav */
+    height: 1px;
+    width: 100%;
+    visibility: hidden;
+}
+
+
+/* COMPONENT STYLES */
+.terminal-nav {
+    /* 1. Use sticky instead of fixed */
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    
+    /* 2. This is the "catch point" */
+    /* The element will scroll normally until it is 2rem from the top, then it sticks. */
+    top: 0rem; 
+    margin-top: 4rem;;
+    
+    /* 3. Aesthetic tweaks */
+    z-index: 999;
+    padding: 0.5rem 0;
+}
+
+.logo {
+
+    display: inline-flex;
+    align-items: center;
+}
+
+.logo-wrapper {
+    font-family: var(--font-mono);
+    font-size: 0.8rem; /* Adjust size here */
+    font-weight: 500;
+    color: #111;
+    border-radius: 4px;
+
+    max-width: var(--max-width);
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.terminal-nav.is-pinned .logo-wrapper {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5; /* Techy thin border */
+    padding: 0.5rem 1rem;      /* Add padding to make it a pill shape */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Lift it up */
+    border-radius: 6px;        /* Soften the edges */
+
+    max-width: calc(var(--max-width) + 2rem); /* Account for padding */
+}
+.terminal-nav.is-pinned .logo-role {
+    opacity: 0;
+    position: absolute;
+    top: -100px;
+}
+
+.base-name {
+    text-decoration: none;
+    border-bottom: none;
+    letter-spacing: -0.5px; /* Tightens it up for a logo feel */
+}
+
+.path-text {
+    color: #666; /* Subtler color for the directory path */
+    margin-left: 0; /* Will be added via JS when text exists */
+    transition: opacity 0.2s ease;
+}
+
+
+/* The Blinking Cursor */
+.cursor {
+    display: inline-block;
+    /* background-color: #0055FF; Electric Blue Accent */
+    width: 10px;
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+}
+
+.terminal-nav.is-pinned .cursor {
+    display: none;
+}
+
+.logo-role {
+  display: block;
+color: var(--text-tertiary);
+opacity: 1;
+position: relative;
+top: 0;
+transition: opacity 0.2s ease;
+max-width: var(--max-width);
+margin: 0 auto;
+font-family: var(--font-mono);
+    font-size: 0.8rem; /* Adjust size here */
+    font-weight: 500;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }

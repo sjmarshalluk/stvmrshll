@@ -6,14 +6,36 @@
     <title>Steve Marshall | Staff Product Designer</title>
     <link href="./stylesheets/site.css" rel="stylesheet" />
     <link href="./images/favicon.png" rel="icon" type="image/png" />
+
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    
 </head>
 <body>
 
-    <div class="container">
+    <div id="sticky-sentinel"></div>
+    <div class="terminal-nav">
+
+      <div class="logo-wrapper">
+        <div class="logo">
+          <a href="#" class="base-name">stvmrshll</a>
+          <span class="path-text" id="dynamic-path"></span>
+          <span class="cursor">_</span>
+        </div>
         
-        <section class="hero">
-            <h1>Steve Marshall</h1>
-            <span class="hero-role">Staff Product Designer / Systems Architect</span>
+      </div>
+</div>
+<div class="logo-role">
+          <span class="logo-role">Staff Product Designer / Systems Architect</span>
+        </div>
+
+      <div class="container">
+        
+        <section class="hero" id="intro">
+           
             
             <p>
                 I navigate ambiguity to build scalable product ecosystems. 
@@ -32,7 +54,7 @@
             <h2>Selected Strategic Works</h2>
 
             <a href="case-study-outside.html" class="case-study-item">
-                <span class="cs-meta">01 — Cross-Product Strategy</span>
+                <span class="cs-meta">01 &mdash;&mdash; Cross-Product Strategy</span>
                 <span class="cs-title">Redefining Onboarding Across the Ecosystem</span>
                 <p class="cs-summary">
                     Moving from fragmented signup flows to a unified, multi-product lifecycle revenue model for Outside's subscription platform.
@@ -40,7 +62,7 @@
             </a>
 
             <a href="case-study-maps.html" class="case-study-item">
-                <span class="cs-meta">02 — Platform Architecture</span>
+                <span class="cs-meta">02 &mdash;&mdash; Platform Architecture</span>
                 <span class="cs-title">Establishing a Shared Maps Platform</span>
                 <p class="cs-summary">
                     Architecting the shared data primitives, iconography, and experience layers to unify the map stack across Gaia GPS and Trailforks.
@@ -48,7 +70,7 @@
             </a>
 
             <a href="case-study-meta.html" class="case-study-item">
-                <span class="cs-meta">03 — 0-to-1</span>
+                <span class="cs-meta">03 &mdash;&mdash; 0-to-1</span>
                 <span class="cs-title">Automated Reality Capture for Quest</span>
                 <p class="cs-summary">
                     Defining the interaction model for automated mixed-reality environment scanning, moving from manual input to machine perception.
@@ -77,5 +99,67 @@
 
     </div>
 
+
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const pathSpan = document.getElementById('dynamic-path');
+        
+        // 1. Define the observer options
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px', // Triggers when section is in middle of screen
+            threshold: 0
+        };
+
+        // 2. The function that runs when scroll happens
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    
+                    // If we are at the top (intro), show nothing or specific text
+                    if (sectionId === 'intro') {
+                        pathSpan.textContent = '';
+                        pathSpan.style.marginLeft = '0';
+                    } else {
+                        // Update text to simulate a directory path
+                        // e.g., " / work"
+                        pathSpan.textContent = `/${sectionId}`; 
+                        pathSpan.style.marginLeft = '0px'; // Add spacing only when text exists
+                    }
+                }
+            });
+        };
+
+        // 3. Start observing all <section> tags
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const sentinel = document.getElementById('sticky-sentinel');
+        const nav = document.querySelector('.terminal-nav');
+
+        const observer = new IntersectionObserver((entries) => {
+            // If the sentinel is NOT visible (intersectionRatio === 0)
+            // AND we have scrolled down (boundingClientRect.top is negative),
+            // then the nav is stuck.
+            if (entries[0].intersectionRatio === 0 && entries[0].boundingClientRect.top < 0) {
+                nav.classList.add('is-pinned');
+            } else {
+                nav.classList.remove('is-pinned');
+            }
+        }, {
+            threshold: [0, 1] // Trigger as soon as it leaves/enters
+        });
+
+        observer.observe(sentinel);
+    });
+</script>
 </body>
 </html>

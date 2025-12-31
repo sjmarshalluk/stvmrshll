@@ -9,8 +9,18 @@
 </head>
 <body>
 
+  <div id="sticky-sentinel"></div>
+    <div class="terminal-nav">
+
+      <div class="logo-wrapper">
+        <div class="logo">
+          <a href="index.html" class="base-name">stvmrshll</a>/<a class="base-name" href="index.html#work">work</a>
+          <span class="path-text" id="dynamic-path">/maps-platform</span>
+        </div>
+      </div>
+    </div>
+
     <main class="container">
-        <a href="index.html" class="nav-back">← Back to Index</a>
 
         <header class="hero">
             <h1>Establishing a Maps Platform</h1>
@@ -137,5 +147,27 @@
         </footer>
 
     </main>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const sentinel = document.getElementById('sticky-sentinel');
+        const nav = document.querySelector('.terminal-nav');
+
+        const observer = new IntersectionObserver((entries) => {
+            // If the sentinel is NOT visible (intersectionRatio === 0)
+            // AND we have scrolled down (boundingClientRect.top is negative),
+            // then the nav is stuck.
+            if (entries[0].intersectionRatio === 0 && entries[0].boundingClientRect.top < 0) {
+                nav.classList.add('is-pinned');
+            } else {
+                nav.classList.remove('is-pinned');
+            }
+        }, {
+            threshold: [0, 1] // Trigger as soon as it leaves/enters
+        });
+
+        observer.observe(sentinel);
+    });
+</script>
 </body>
 </html>
