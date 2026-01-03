@@ -26,7 +26,7 @@
     --spacing-xl: 8rem;
     
     /* Layout */
-    --max-width: 720px; /* Optimal line length for reading (60-75 chars) */
+    --max-width: 760px; /* Optimal line length for reading (60-75 chars) */
     --radius-sm: 2px;
 }
 
@@ -57,6 +57,7 @@ body {
     max-width: var(--max-width);
     margin: 0 auto;
     position: relative;
+    padding: 0 1rem;
 }
 
 section {
@@ -382,45 +383,6 @@ footer {
     align-items: flex-start;
 }
 
-/* --- 11. RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 768px) {
-    :root {
-        --spacing-md: 1.5rem;
-        --spacing-lg: 3rem;
-    }
-
-    h1 { font-size: 1.75rem; }
-    h2 { font-size: 1rem; }
-    
-    .memo-meta {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 1.5rem 0;
-    }
-    
-    .insight-box {
-        padding: 1.5rem;
-    }
-
-    footer {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-}
-
-/* Mobile Fallback: Reset everything to normal */
-@media (max-width: 900px) {
-    .figure-container.breakout {
-        width: 100%;
-        left: auto;
-        transform: none;
-        margin-top: 3rem;
-        margin-bottom: 3rem;
-    }
-    .figure-container.breakout .caption {
-        width: 100%;
-    }
-}
 
 
 
@@ -465,6 +427,7 @@ footer {
     max-width: var(--max-width);
     margin: 0 auto;
     transition: all 0.3s ease;
+    padding: 0 1rem;
 }
 
 .terminal-nav.is-pinned .logo-wrapper {
@@ -474,7 +437,7 @@ footer {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Lift it up */
     border-radius: 6px;        /* Soften the edges */
 
-    max-width: calc(var(--max-width) + 2rem); /* Account for padding */
+    max-width: var(--max-width); /* Account for padding */
 }
 .terminal-nav.is-pinned .logo-role {
     opacity: 0;
@@ -520,9 +483,70 @@ margin: 0 auto;
 font-family: var(--font-mono);
     font-size: 0.8rem; /* Adjust size here */
     font-weight: 500;
+    padding: 0 1rem;
 }
 
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+
+
+
+
+/* --- 11. RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 768px) {
+    :root {
+        --spacing-md: 1.5rem;
+        --spacing-lg: 3rem;
+    }
+
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1rem; }
+    
+    .memo-meta {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
+    }
+    
+    .insight-box {
+        padding: 1.5rem;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .terminal-nav {
+        padding: 0;
+    }
+    .terminal-nav.is-pinned .logo-wrapper {
+      background: #FFFFFF;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid #E5E5E5; /* Techy thin border */
+      padding: 0.5rem 1rem;      /* Add padding to make it a pill shape */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Lift it up */
+      border-radius: 0;        /* Soften the edges */
+
+      max-width: var(--max-width); /* Account for padding */
+  }
+}
+
+/* Mobile Fallback: Reset everything to normal */
+@media (max-width: 900px) {
+    .figure-container.breakout {
+        width: 100%;
+        left: auto;
+        transform: none;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+    .figure-container.breakout .caption {
+        width: 100%;
+    }
 }
