@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Marshall | Staff Product Designer</title>
+    <link href="./stylesheets/site.css" rel="stylesheet" />
+    <link href="./images/favicon.png" rel="icon" type="image/png" />
+
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQTC3NEETR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QQTC3NEETR');
+</script>
+</head>
+<body>
+
+    <main class="case-study-container">
+
+        <div class="case-study-section">
+            <div class="section-text">
+                <div class="case-study-nav">
+                    <a href="index.html" class="base-name">stvmrshll</a>/<a class="base-name" href="work.html">work</a><span class="path-text">/bysm</span>
+                </div>
+
+                <p class="intro" data-figure="fig-01">
+                    Following the introduction of LiDAR on iPhone, Meta wanted to understand whether and how people might bring their physical spaces into the Metaverse.
+                </p>
+
+                <div class="memo-meta" style="margin-top: 2rem;">
+                    <div class="meta-item">
+                        <strong>Role</strong>
+                        <span>Design Lead</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Team</strong>
+                        <span>Me + PM + UXR</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Output</strong>
+                        <span>Strategy &amp; Capture POE</span>
+                    </div>
+                </div>
+
+                <h3 data-figure="fig-01">Bringing Physical Space into the Metaverse</h3>
+<p>
+    When Apple introduced LiDAR to the iPhone, Meta wanted to understand whether this new capability could meaningfully enhance Metaverse experiences. Rather than starting with a product to build, the goal of this project was exploratory.
+</p>
+
+<p>
+    We set out to answer three fundamental questions:
+</p>
+
+<ul style="margin-bottom: 2rem;">
+    <li>Why would someone want to bring their physical space into the Metaverse?</li>
+    <li>What technical capabilities would be required to enable this?</li>
+    <li>What might the user experience look like for any future product?</li>
+</ul>
+
+<h3 data-figure="fig-02">Establishing Direction in an Undefined Space</h3>
+<p>
+    Given the novelty of the problem, there was little existing research to draw from. I began by running a design sprint with stakeholders across design, research, and engineering to surface current assumptions and unknowns.
+</p>
+
+<p>
+    This created a shared baseline that allowed engineering teams to explore technical feasibility in parallel, while we focused on identifying and evaluating potential use cases.
+</p>
+
+<p>
+    Early exploration surfaced many possible directions, but most led to vague or unfocused outcomes. To progress, we needed a clear primary use case. Using internal interviews and literature reviews of related research, we validated and refined our concepts.
+</p>
+
+<p>
+    Through this process, social connection emerged as the strongest and most coherent driver. This decision clarified our goals and helped adjacent teams understand how their work intersected with ours.
+</p>
+
+<h3 data-figure="fig-03">Defining Capture Requirements</h3>
+<p>
+    With leadership alignment on direction, we shifted focus to understanding what users would need from the process of digitizing their space.
+</p>
+
+<p>
+    Three core requirements consistently surfaced:
+</p>
+
+<ul>
+    <li><strong>Privacy:</strong> Retaining granular control over what is and isn’t shared.</li>
+    <li><strong>Personalization:</strong> Allowing customization while preserving physical layout.</li>
+    <li><strong>Effort:</strong> Minimizing time and friction during capture.</li>
+</ul>
+
+<p>
+    Initial assumptions centered on capturing a single photogrammetric mesh of an entire space. However, when evaluated against these requirements, this approach proved problematic—high capture time, heavy data payloads, limited privacy control, and constrained personalization.
+</p>
+
+<p>
+    Rather than pivoting to fit the technology, we aligned with leadership to stay focused on the user experience and redefine what capture needed to be.
+</p>
+
+<h3 data-figure="fig-04">Redefining Capture and the User Experience</h3>
+<p>
+    Working closely with engineering, we defined an alternative approach using semantic recognition to capture spaces as collections of individual surfaces and objects, rather than a single mesh.
+</p>
+
+<p>
+    This enabled a lighter-weight, extensible representation of space with object-level privacy and editing, and supported multiple modes of representation:
+</p>
+
+<ul>
+    <li><strong>Lifelike:</strong> Generated directly from captured textures and meshes.</li>
+    <li><strong>Stylized:</strong> Clean reconstructions using realistic stock assets.</li>
+    <li><strong>Customized:</strong> Artistically modified spaces that retain real-world layout.</li>
+</ul>
+
+<h3 data-figure="fig-05">Prototyping the UX</h3>
+
+<p>
+    From these requirements, I defined the core components of the capture experience—room layout, object volumes, textures, and meshes—and translated them into high-level flows and Figma prototypes.
+</p>
+
+<p>
+    A key insight was the need to minimize disruption to VR use. We proposed a non-linear capture process that allowed users to incrementally add fidelity over time:
+</p>
+
+<ul>
+    <li>Scan for surfaces and object volumes.</li>
+    <li>Capture textures to customize spaces.</li>
+    <li>Scan individual objects to replace low-fidelity geometry.</li>
+</ul>
+
+<p>
+    This approach allowed users to quickly bring a usable version of their space into VR, then progressively refine it as needed—balancing effort, control, and immersion.
+</p>
+
+<footer>
+            <a href="case-study-meta.html">← Previous: Meta VR Capture</a>
+            <a href="case-study-mapillary.html">Next: Mapillary Data →</a>
+        </footer>
+
+
+            </div>
+            <div class="section-images">
+                <div class="figure-container bg-light" data-figure-id="fig-01">
+                    <div class="figure-content">
+                        <img src="images/bysm/ui.png" alt="Workshops">
+                    </div>
+                    <div class="caption">
+                        
+                    </div>
+                </div>
+                
+
+                <div class="figure-container bg-light" data-figure-id="fig-02">
+                    <div class="figure-content">
+                        <img src="images/bysm/landscape.png" alt="Workshops">
+                    </div>
+                    <div class="caption">
+                        
+                    </div>
+                </div>
+
+                <div class="figure-container" data-figure-id="fig-03">
+                    <div class="figure-content">
+                        <img src="images/bysm/xx.png" alt="Workshops">
+                    </div>
+                    <div class="caption">
+                        
+                    </div>
+                </div>
+
+                <div class="figure-container bg-dark" data-figure-id="fig-04">
+                    <div class="figure-content">
+                        <img src="images/bysm/framework.png" alt="Workshops">
+                    </div>
+                    <div class="caption">
+                        
+                    </div>
+                </div>
+
+                <div class="figure-container full-bleed" data-figure-id="fig-05">
+                    <div class="figure-content">
+                        <img src="images/bysm/prototype.png" alt="Workshops">
+                    </div>
+                    <div class="caption">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+    </main>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll('[data-figure]');
+        const figures = document.querySelectorAll('[data-figure-id]');
+
+        if (sections.length && figures.length) {
+            figures[0].classList.add('is-active');
+
+            const figureObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const figureId = entry.target.getAttribute('data-figure');
+                        figures.forEach(fig => fig.classList.remove('is-active'));
+                        const targetFigure = document.querySelector(`[data-figure-id="${figureId}"]`);
+                        if (targetFigure) {
+                            targetFigure.classList.add('is-active');
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '-30% 0px -60% 0px',
+                threshold: 0
+            });
+
+            sections.forEach(section => figureObserver.observe(section));
+        }
+    });
+</script>
+</body>
+</html>

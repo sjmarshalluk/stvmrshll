@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Marshall | Staff Product Designer</title>
+    <link href="./stylesheets/site.css" rel="stylesheet" />
+    <link href="./images/favicon.png" rel="icon" type="image/png" />
+
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQTC3NEETR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QQTC3NEETR');
+</script>
+</head>
+<body>
+
+    <main class="case-study-container">
+
+        <div class="case-study-section">
+            <div class="section-text">
+                <div class="case-study-nav">
+                    <a href="index.html" class="base-name">stvmrshll</a>/<a class="base-name" href="projects.html">projects</a><span class="path-text">/design-club</span>
+                </div>
+
+                <p class="intro" data-figure="fig-01">
+                    A former colleague set up a non-profit to teach design thinking as a life skills to school kids. I volunteered to help write the initial curriculum, and deliver sessions to local community groups. The initiative grew to reach thousands of students across multiple cities over several years.
+                </p>
+
+
+                
+
+
+<footer>
+            <a href="projects.html">← Back to Projects</a>
+            <a href="project-deskbeers.html">Next: DeskBeers →</a>
+        </footer>
+
+            </div>
+            <div class="section-images">
+                <div class="figure-container full-bleed" data-figure-id="fig-01">
+                    <div class="figure-content">
+                        <img src="images/projects/dc1.png" alt="Design Club">
+                    </div>
+                    <div class="caption">
+                         
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        
+
+    </main>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll('[data-figure]');
+        const figures = document.querySelectorAll('[data-figure-id]');
+
+        if (sections.length && figures.length) {
+            figures[0].classList.add('is-active');
+
+            const visibleSections = new Set();
+
+            const figureObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        visibleSections.add(entry.target);
+                    } else {
+                        visibleSections.delete(entry.target);
+                    }
+                });
+
+                let topmostSection = null;
+                let topmostPosition = Infinity;
+
+                visibleSections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top < topmostPosition) {
+                        topmostPosition = rect.top;
+                        topmostSection = section;
+                    }
+                });
+
+                if (topmostSection) {
+                    const figureId = topmostSection.getAttribute('data-figure');
+                    figures.forEach(fig => fig.classList.remove('is-active'));
+                    const targetFigure = document.querySelector(`[data-figure-id="${figureId}"]`);
+                    if (targetFigure) {
+                        targetFigure.classList.add('is-active');
+                    }
+                }
+            }, {
+                rootMargin: '-20% 0px -40% 0px',
+                threshold: 0
+            });
+
+            sections.forEach(section => figureObserver.observe(section));
+        }
+    });
+</script>
+</body>
+</html>

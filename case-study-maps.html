@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
-    
+
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QQTC3NEETR"></script>
@@ -26,164 +26,175 @@
 </head>
 <body>
 
-  <div id="sticky-sentinel"></div>
-    <div class="terminal-nav">
+    <main class="case-study-container">
 
-      <div class="logo-wrapper">
-        <div class="logo">
-          <a href="index.html" class="base-name">stvmrshll</a>/<a class="base-name" href="index.html#work">work</a>
-          <span class="path-text" id="dynamic-path">/maps-platform</span>
-        </div>
-      </div>
-    </div>
-
-    <main class="container">
-
-        <header class="hero">
-            <h1>Establishing a Maps Platform</h1>
-            <p style="font-size: 1.25rem; color: var(--text-secondary);">
-                Architecting the shared geospatial primitives and data layers for Outside’s multi-brand ecosystem.
-            </p>
-        </header>
-
-        <div class="memo-meta">
-            <div class="meta-item">
-                <strong>Role</strong>
-                <span>Principal Product Designer</span>
-            </div>
-            <div class="meta-item">
-                <strong>Scope</strong>
-                <span>Platform Architecture</span>
-            </div>
-            <div class="meta-item">
-                <strong>Outcome</strong>
-                <span>Team Charter & System Model</span>
-            </div>
-        </div>
-
-        <section>
-            <h2>01 // The Friction</h2>
-            <h3>The "Tower of Babel" Problem</h3>
-            <p>
-                Outside’s portfolio (Gaia GPS, Trailforks, MapMy) is built entirely around maps. Yet, despite maps being our core competency, we treated them as isolated, disposable features.
-            </p>
-            <p>
-                There was no shared vocabulary. "Layers," "Tracks," and "Waypoints" meant different things to different engineering teams. This led to massive technical duplication—we were solving the same rendering and data storage problems three times over, with inconsistent results for the user.
-            </p>
-            
-            <div class="figure-container">
-                <div class="figure-content">
-                  <img src="images/outside/what-is-map.png" alt="Defining the Map Object">
+        <div class="case-study-section">
+            <div class="section-text">
+                <div class="case-study-nav">
+                    <a href="index.html" class="base-name">stvmrshll</a>/<a class="base-name" href="work.html">work</a><span class="path-text">/maps-platform</span>
                 </div>
-                <div class="caption">
-                    FIG 01. DEFINING THE OBJECT. Before building a platform, I had to align stakeholders on the evolution of a map: moving from a "Static Image" to a "Functional Interface" that supports complex user workflows.
-                </div>
-            </div>
-        </section>
 
-        <section>
-            <h2>02 // The System Model</h2>
-            <h3>Decomposing the Anatomy</h3>
-            
-            <div class="insight-box">
-                <span class="insight-label">The Insight</span>
-                <p>
-                    "We couldn't start with screens or APIs. We needed a Conceptual Model first. We had to decouple the 'Experience' (what the user touches) from the 'Functionality' (the data services)."
+                <p class="intro" data-figure="fig-01">
+                    Outside’s map-based products lacked a shared conceptual model, resulting in duplication and inconsistent experiences. This work defined a common “Map Anatomy” separating experience from platform services, aligning teams around shared primitives and enabling cross-product features and platform investment.
                 </p>
+
+                <div class="memo-meta" style="margin-top: 2rem;">
+                    <div class="meta-item">
+                        <strong>Role</strong>
+                        <span>Principal Product Designer</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Scope</strong>
+                        <span>Platform Architecture</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Outcome</strong>
+                        <span>Team Charter & System Model</span>
+                    </div>
+                </div>
+
+                <h3 data-figure="fig-02">The "Tower of Babel" Problem</h3>
+                <p>
+                    Outside's portfolio (Gaia GPS, Trailforks, MapMy) is built entirely around maps. Yet, despite maps being our core competency, we treated them as isolated, disposable features.
+                </p>
+                <p>
+                    There was no shared vocabulary. "Layers," "Tracks," and "Waypoints" meant different things to different engineering teams. This led to massive technical duplication—we were solving the same rendering and data storage problems three times over, with inconsistent results for the user.
+                </p>
+
+                <h3 data-figure="fig-03">Decomposing the Anatomy</h3>
+                <p>
+                    We couldn't start with screens or APIs. We needed a Conceptual Model first. We had to decouple the "Experience" (what the user touches) from the "Functionality" (the data services).
+                </p>
+                <p>
+                    I created the <strong>"Map Anatomy"</strong> framework to act as the contract between Design and Engineering. This framework separated the application into two distinct layers:
+                </p>
+                <ul>
+                    <li><strong>The Experience Layer:</strong> Viewport controls, UI containers, and interactions (Product-owned).</li>
+                    <li><strong>The Data Layer:</strong> Tilesets, user location services, and object definitions (Platform-owned).</li>
+                </ul>
+
+                <h3 data-figure="fig-04">From Anatomy to Services</h3>
+                <p>
+                    With the anatomy defined, I worked with engineering leads to map these abstract concepts to concrete <strong>Shared Services</strong>. We identified that while UI might vary between apps, the core primitives—Search, Route Storage, and Offline Management—should be universal.
+                </p>
+
+                <h3 data-figure="fig-05">Enabling Cross-Product Experiences</h3>
+                <p>
+                    The ultimate goal wasn't just code efficiency; it was user value. By centralizing the data layer, we unlocked the ability to pull context from across the network.
+                </p>
+                <p>
+                    I visualized how a unified backend could enable a user to plan a route in Gaia, see live trail reports from Trailforks, and track their progress on an Apple Watch—all sharing the same "Truth" from the database.
+                </p>
+
+                <h3>Infrastructure as Design</h3>
+                <p>
+                    This work successfully shifted the conversation from "pixel tweaking" to "platform funding."
+                </p>
+                <ul>
+                    <li><strong>Team Funding:</strong> The "Map Anatomy" clarity directly supported the business case to fund and hire a dedicated Maps Platform Engineering team.</li>
+                    <li><strong>Unified Data:</strong> We identified the critical need for a "Canonical Trails Database," initiating a multi-year effort to merge the Gaia and Trailforks datasets.</li>
+                    <li><strong>Gaia Adventure Modes:</strong> The framework laid the groundwork for Gaia's new "Adventure Modes," allowing the interface to reconfigure itself based on the shared primitives we defined.</li>
+                </ul>
+
+                <footer>
+                    <a href="case-study-outside.html">← Previous: Onboarding Strategy</a>
+                    <a href="case-study-meta.html">Next: Meta VR Capture →</a>
+                </footer>
+
             </div>
-
-            <p>
-                I created the <strong>"Map Anatomy"</strong> framework to act as the contract between Design and Engineering. This framework separated the application into two distinct layers:
-            </p>
-            <ul>
-                <li><strong>The Experience Layer:</strong> Viewport controls, UI containers, and interactions (Product-owned).</li>
-                <li><strong>The Data Layer:</strong> Tilesets, user location services, and object definitions (Platform-owned).</li>
-            </ul>
-
-            <div class="figure-container breakout">
-                <div class="figure-content">
-                  <img src="images/outside/map-anatomy.png" alt="Map Anatomy Diagram">
-                                    </div>
-                <div class="caption">
-                    FIG 02. THE MAP ANATOMY. This diagram became the foundational document for the platform team. It clearly demarcated which components should be centralized (bottom) and which should remain flexible (top).
+            <div class="section-images">
+                <div class="figure-container full-bleed" data-figure-id="fig-01" style="background-color: #181717;">
+                    <div class="figure-content">
+                        <img src="images/outside/gaia-map.png" alt="Defining the Map Object">
+                    </div>
+                    <div class="caption">
+                        xx
+                    </div>
+                </div>
+                <div class="figure-container" data-figure-id="fig-02" style="background-color: #181717;">
+                    <div class="figure-content">
+                        <img src="images/outside/what-is-map.png" alt="Defining the Map Object">
+                    </div>
+                    <div class="caption">
+                        Everyone had a different mental model of what a "map" even was
+                    </div>
+                </div>
+                <div class="figure-container bg-dark" data-figure-id="fig-03">
+                    <div class="figure-content">
+                        <img src="images/outside/map-anatomy.png" alt="Map Anatomy Diagram">
+                    </div>
+                    <div class="caption">
+                        The Map Anatomy
+                    </div>
+                </div>
+                <div class="figure-container full-bleed" data-figure-id="fig-04">
+                    <div class="figure-content">
+                        <img src="images/outside/services.png" alt="Maps Platform Service Architecture">
+                    </div>
+                    <div class="caption">
+                        Mapping product experiences to platform capabilities
+                    </div>
+                </div>
+                <div class="figure-container full-bleed" data-figure-id="fig-05">
+                    <div class="figure-content">
+                        <img src="images/outside/vision.png" alt="Maps Platform Vision">
+                    </div>
+                    <div class="caption">
+                        A Maps Platform Vision was created to illustrate cross-product experiences and align team roadmaps
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <h3>From Anatomy to Services</h3>
-            <p>
-                With the anatomy defined, I worked with engineering leads to map these abstract concepts to concrete <strong>Shared Services</strong>. We identified that while UI might vary between apps, the core primitives—Search, Route Storage, and Offline Management—should be universal.
-            </p>
-             <div class="figure-container">
-                <div class="figure-content">
-
-                  <img src="images/outside/services.png" alt="Maps Platform Service Architecture">
-                                    </div>
-                <div class="caption">
-                    FIG 03. SERVICE MAPPING. Translating the design anatomy into an engineering service architecture to support unified route storage and tile rendering.
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>03 // The Vision</h2>
-            <h3>Enabling Cross-Product Experiences</h3>
-            <p>
-                The ultimate goal wasn't just code efficiency; it was user value. By centralizing the data layer, we unlocked the ability to pull context from across the network.
-            </p>
-            <p>
-                I visualized how a unified backend could enable a user to plan a route in Gaia, see live trail reports from Trailforks, and track their progress on an Apple Watch—all sharing the same "Truth" from the database.
-            </p>
-
-            <div class="figure-container breakout">
-                <div class="figure-content">
-
-                  <img src="images/outside/vision.png" alt="Maps Platform Vision">
-                                    </div>
-                <div class="caption">
-                    FIG 04. THE FUTURE STATE. A vision of "Context-Aware Mapping," where data from the entire Outside network enriches the map experience regardless of which specific app the user is holding.
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>04 // The Impact</h2>
-            <h3>Infrastructure as Design</h3>
-            <p>
-                This work successfully shifted the conversation from "pixel tweaking" to "platform funding."
-            </p>
-            <ul>
-                <li><strong>Team Funding:</strong> The "Map Anatomy" clarity directly supported the business case to fund and hire a dedicated Maps Platform Engineering team.</li>
-                <li><strong>Unified Data:</strong> We identified the critical need for a "Canonical Trails Database," initiating a multi-year effort to merge the Gaia and Trailforks datasets.</li>
-                <li><strong>Gaia Adventure Modes:</strong> The framework laid the groundwork for Gaia’s new "Adventure Modes," allowing the interface to reconfigure itself based on the shared primitives we defined.</li>
-            </ul>
-        </section>
-
-        <footer>
-            <a href="case-study-outside.html">← Previous: Onboarding Strategy</a>
-            <a href="case-study-meta.html">Next: Meta VR Capture →</a>
-        </footer>
+        
 
     </main>
 
     <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const sentinel = document.getElementById('sticky-sentinel');
-        const nav = document.querySelector('.terminal-nav');
+        const sections = document.querySelectorAll('[data-figure]');
+        const figures = document.querySelectorAll('[data-figure-id]');
 
-        const observer = new IntersectionObserver((entries) => {
-            // If the sentinel is NOT visible (intersectionRatio === 0)
-            // AND we have scrolled down (boundingClientRect.top is negative),
-            // then the nav is stuck.
-            if (entries[0].intersectionRatio === 0 && entries[0].boundingClientRect.top < 0) {
-                nav.classList.add('is-pinned');
-            } else {
-                nav.classList.remove('is-pinned');
-            }
-        }, {
-            threshold: [0, 1] // Trigger as soon as it leaves/enters
-        });
+        if (sections.length && figures.length) {
+            figures[0].classList.add('is-active');
 
-        observer.observe(sentinel);
+            const visibleSections = new Set();
+
+            const figureObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        visibleSections.add(entry.target);
+                    } else {
+                        visibleSections.delete(entry.target);
+                    }
+                });
+
+                let topmostSection = null;
+                let topmostPosition = Infinity;
+
+                visibleSections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top < topmostPosition) {
+                        topmostPosition = rect.top;
+                        topmostSection = section;
+                    }
+                });
+
+                if (topmostSection) {
+                    const figureId = topmostSection.getAttribute('data-figure');
+                    figures.forEach(fig => fig.classList.remove('is-active'));
+                    const targetFigure = document.querySelector(`[data-figure-id="${figureId}"]`);
+                    if (targetFigure) {
+                        targetFigure.classList.add('is-active');
+                    }
+                }
+            }, {
+                rootMargin: '-20% 0px -40% 0px',
+                threshold: 0
+            });
+
+            sections.forEach(section => figureObserver.observe(section));
+        }
     });
 </script>
 </body>

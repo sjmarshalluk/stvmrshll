@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Marshall | Staff Product Designer</title>
+    <link href="./stylesheets/site.css" rel="stylesheet" />
+    <link href="./images/favicon.png" rel="icon" type="image/png" />
+
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQTC3NEETR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QQTC3NEETR');
+</script>
+</head>
+<body>
+
+    <main class="case-study-container">
+
+        <div class="case-study-section">
+            <div class="section-text">
+                <div class="case-study-nav">
+                    <a href="index.html" class="base-name">stvmrshll</a>/<a class="base-name" href="work.html">work</a><span class="path-text">/geospatial-data</span>
+                </div>
+
+            <p class="intro" data-figure="fig-01">
+                As their open dataset grew, Mapillary needed to understand how different users accessed and navigated geospatial data in order to consider potential solutions that balanced performance, legibility, and feasibility
+            </p>
+
+            <div class="memo-meta" style="margin-top: 2rem;">
+                <div class="meta-item">
+                    <strong>Role</strong>
+                    <span>Design Lead</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Output</strong>
+                    <span>Prototypes</span>
+                </div>
+            </div>
+                <h3 data-figure="fig-02">When More Data Makes a Map Less Usable</h3>
+<p>
+    Mapillary is an open-source street-level imagery platform that uses computer vision and structure-from-motion (SfM) to generate large-scale 2D and 3D geospatial data. As usage grew, so did the density of imagery—particularly in urban and high-traffic areas.
+</p>
+
+<p>
+    While the availability of data was Mapillary’s strength, it had begun to undermine usability. In many locations, the map became visually congested, slow to load, and difficult to navigate—making it harder, not easier, for users to access the information they needed.
+</p>
+
+<p>
+    I was asked to explore how we might improve the legibility and accessibility of this growing dataset across platforms, without compromising data integrity or the needs of different user groups.
+</p>
+
+<ul style="margin-bottom: 2rem;">
+    <li>Excessive visual clutter obscured geographic context.</li>
+    <li>Performance degraded in high-density areas.</li>
+    <li>Users struggled to locate relevant imagery for specific tasks.</li>
+</ul>
+
+<h3 data-figure="fig-03">Making the Users Visible</h3>
+<p>
+    At the outset, Mapillary lacked a shared understanding of who its users were and how they accessed the data. Before proposing solutions, I focused on grounding the problem in real user needs.
+</p>
+
+<p>
+    I conducted interviews across known user types to understand platforms, goals, and workflows. To complement this qualitative work, I built lightweight analytics tools on top of Mapillary’s public API to identify usage patterns we couldn’t reach directly.
+</p>
+
+<p>
+    By combining these inputs, I developed a set of core personas and mapped their primary workflows. This clarified that “too much data” was not a single problem, but manifested differently depending on user intent.
+</p>
+
+<h3 data-figure="fig-04">Exploring Solutions with Real Data</h3>
+<p>
+    Rather than relying on abstract mockups, I prototyped directly with live Mapillary data using Mapillary JS and Mapbox JS. This allowed us to test concepts under real-world conditions and surface technical constraints early.
+</p>
+
+<p>
+    Through exploration, a key insight emerged: there was no single optimal solution. Improvements for one user group often degraded the experience for another. Some internally popular ideas—such as aggressively map-matching imagery to roads—risked hiding valuable data or misrepresenting its true location.
+</p>
+
+<h3 data-figure="fig-05">Varying User Needs</h3>
+
+<p>
+    The personas became critical tools for communicating these trade-offs and preventing oversimplified fixes. However, they highlighted how one solution might seem ideal for one user, but detrimental for another.</p>
+</p>
+
+<h3 data-figure="fig-06">Outcomes and Strategic Direction</h3>
+<p>
+    Instead of converging on a single feature, the work resulted in a set of complementary solution directions, spanning near-term improvements and longer-term shifts in thinking.
+</p>
+
+<ul>
+    <li><strong>Meta Sequences:</strong> A concept to aggregate imagery along mapped routes, improving visual clarity while preserving access to the underlying data.</li>
+    <li><strong>Data Filtering:</strong> Near-term controls that allowed users to filter imagery by detected features, reducing on-screen clutter without automation.</li>
+    <li><strong>Workflow Automation:</strong> A broader insight that future products could automate entire user tasks rather than forcing manual data exploration.</li>
+</ul>
+
+<p>
+    While changing company priorities limited full implementation, this work reshaped how the team thought about users, data, and UX beyond the interface. It established a shared understanding of Mapillary’s audience and introduced automation as a strategic lens for future product decisions.
+</p>
+
+                <footer>
+                    <a href="case-study-bysm.html">← Previous: LiDAR Metaverse</a>
+                    
+                    <a href="index.html">Back to Index →</a>
+                </footer>
+            </div>
+            <div class="section-images">
+                <div class="figure-container bg-light" data-figure-id="fig-01">
+                    <div class="figure-content">
+                        <img src="images/mapillary/solutions.png" alt="Mapillary">
+                    </div>
+                    <div class="caption">
+                        
+                    </div>
+                </div>
+
+                <div class="figure-container bg-light" data-figure-id="fig-02">
+                    <div class="figure-content">
+                        <img src="images/mapillary/data.png" alt="Mapillary data">
+                    </div>
+                    <div class="caption">
+                        The density of user-generated data was causing performance and legibility issues
+                    </div>
+                </div>
+
+                <div class="figure-container bg-light" data-figure-id="fig-03">
+                    <div class="figure-content">
+                        <img src="images/mapillary/users.png" alt="Mapillary users">
+                    </div>
+                    <div class="caption">
+                        Identifying distinct users and their workflows was critical to understanding trade-offs
+                    </div>
+                </div>
+
+                <div class="figure-container bg-light" data-figure-id="fig-04">
+                    <div class="figure-content">
+                        <video width="80%" muted loop autoplay class="col" style="border-radius: 6px;">
+                            <source src="./images/mapillary/elva-path.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="caption">
+                        Prototyping with live data helped surface technical constraints early
+                    </div>
+                </div>
+
+                <div class="figure-container bg-light" data-figure-id="fig-05">
+                    <div class="figure-content">
+                        <img src="images/mapillary/data-challenges.png" alt="Mapillary users">
+                    </div>
+                    <div class="caption">
+                        What worked for one user type often conflicted with the needs of another
+                    </div>
+                </div>
+
+                <div class="figure-container bg-light" data-figure-id="fig-06">
+                    <div class="figure-content">
+                        <img src="images/mapillary/josm.png" alt="Mapillary users">
+                    </div>
+                    <div class="caption">
+                        One of the solutions was integrating Mapillary data directly into existing GIS tools like JOSM
+                    </div>
+                </div>
+                
+
+
+                
+            </div>
+        </div>
+
+        
+
+    </main>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Sticky slideshow: sync images to text sections
+        const sections = document.querySelectorAll('[data-figure]');
+        const figures = document.querySelectorAll('[data-figure-id]');
+
+        if (sections.length && figures.length) {
+            figures[0].classList.add('is-active');
+
+            const figureObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const figureId = entry.target.getAttribute('data-figure');
+                        figures.forEach(fig => fig.classList.remove('is-active'));
+                        const targetFigure = document.querySelector(`[data-figure-id="${figureId}"]`);
+                        if (targetFigure) {
+                            targetFigure.classList.add('is-active');
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '-30% 0px -60% 0px',
+                threshold: 0
+            });
+
+            sections.forEach(section => figureObserver.observe(section));
+        }
+    });
+</script>
+</body>
+</html>
