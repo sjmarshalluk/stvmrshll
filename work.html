@@ -26,6 +26,143 @@
 </head>
 <body>
 
+    <!-- Password gate -->
+    <div id="auth-overlay">
+        <div id="auth-modal">
+            <span class="auth-label">Password required</span>
+            <div class="auth-input-row">
+                <input type="password" id="auth-input" placeholder="Enter password" autocomplete="off" autofocus />
+                <button id="auth-submit">&rarr;</button>
+            </div>
+            <span id="auth-error">Incorrect password</span>
+        </div>
+    </div>
+
+    <style>
+        #auth-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(247, 247, 247, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+        #auth-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #auth-modal {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            width: 320px;
+        }
+        .auth-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-tertiary);
+        }
+        .auth-input-row {
+            display: flex;
+            gap: 0.5rem;
+        }
+        #auth-input {
+            flex: 1;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            padding: 0.65rem 0.75rem;
+            border: 1px solid var(--accent-line);
+            border-radius: 4px;
+            background: #fff;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        #auth-input:focus {
+            border-color: var(--text-primary);
+        }
+        #auth-input.error {
+            border-color: #c44;
+        }
+        #auth-submit {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            padding: 0.65rem 1rem;
+            border: 1px solid var(--text-primary);
+            border-radius: 4px;
+            background: var(--text-primary);
+            color: var(--bg-color);
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        #auth-submit:hover {
+            opacity: 0.8;
+        }
+        #auth-error {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #c44;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        #auth-error.visible {
+            opacity: 1;
+        }
+    </style>
+
+    <script>
+        (function() {
+            // SHA-256 hash of the password
+            var HASH = '7367c98b14b9b37fcf0dd9bd6eb45e8671bed22fe70f085013ecae052eea27a4';
+            var KEY = 'portfolio_auth';
+            var overlay = document.getElementById('auth-overlay');
+            var input = document.getElementById('auth-input');
+            var btn = document.getElementById('auth-submit');
+            var err = document.getElementById('auth-error');
+
+            if (sessionStorage.getItem(KEY) === 'true') {
+                overlay.remove();
+            } else {
+                document.body.style.overflow = 'hidden';
+            }
+
+            async function sha256(str) {
+                var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+                return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+            }
+
+            async function tryAuth() {
+                var hash = await sha256(input.value);
+                var clean = HASH.replace(/\s/g, '');
+                if (hash === clean) {
+                    sessionStorage.setItem(KEY, 'true');
+                    overlay.classList.add('hidden');
+                    document.body.style.overflow = '';
+                    setTimeout(function() { overlay.remove(); }, 300);
+                } else {
+                    input.classList.add('error');
+                    err.classList.add('visible');
+                    input.value = '';
+                    setTimeout(function() {
+                        input.classList.remove('error');
+                        err.classList.remove('visible');
+                    }, 2000);
+                }
+            }
+
+            btn.addEventListener('click', tryAuth);
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') tryAuth();
+            });
+        })();
+    </script>
+
     <main class="case-study-container">
 
         <div class="header-section">
