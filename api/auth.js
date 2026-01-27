@@ -1,11 +1,6 @@
-export function middleware(request) {
-    const url = new URL(request.url);
+export const config = { runtime: 'edge' };
 
-    // Only protect work page
-    if (url.pathname !== '/work.html' && url.pathname !== '/work') {
-        return;
-    }
-
+export default async function handler(request) {
     const auth = request.headers.get('authorization');
 
     if (auth) {
@@ -14,9 +9,12 @@ export function middleware(request) {
             const decoded = atob(encoded);
             const [user, pass] = decoded.split(':');
 
-            // Change these credentials
             if (user === 'steve' && pass === 'portfolio2025') {
-                return;
+                const url = new URL(request.url);
+                const res = await fetch(new URL('/_work.html', url.origin));
+                return new Response(res.body, {
+                    headers: { 'content-type': 'text/html; charset=utf-8' }
+                });
             }
         }
     }
@@ -29,7 +27,3 @@ export function middleware(request) {
         }
     });
 }
-
-export const config = {
-    matcher: ['/work.html', '/work']
-};

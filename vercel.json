@@ -1,3 +1,10 @@
 {
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    { "source": "/work", "destination": "/api/auth" },
+    { "source": "/work.html", "destination": "/api/auth" }
+  ],
+  "redirects": [
+    { "source": "/_work.html", "destination": "/work", "statusCode": 308 }
+  ]
 }
