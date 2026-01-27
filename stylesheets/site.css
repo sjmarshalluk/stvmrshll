@@ -773,6 +773,17 @@ font-family: var(--font-mono);
     background: var(--bg-color);
     padding: 0.5rem 0;
     z-index: 10;
+    position: relative;
+}
+
+.case-study-nav::before {
+    content: "←";
+    position: absolute;
+    left: -20px;
+}
+
+.case-study-nav.home-nav::before {
+    content: none;
 }
 
 .case-study-nav .base-name {

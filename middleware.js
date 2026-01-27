@@ -1,8 +1,8 @@
 export function middleware(request) {
     const url = new URL(request.url);
 
-    // Only protect work.html
-    if (url.pathname !== '/work.html') {
+    // Only protect work page
+    if (url.pathname !== '/work.html' && url.pathname !== '/work') {
         return;
     }
 
@@ -31,5 +31,5 @@ export function middleware(request) {
 }
 
 export const config = {
-    matcher: '/work.html'
+    matcher: ['/work.html', '/work']
 };
