@@ -53,8 +53,8 @@ body {
 }
 
 ::selection {
-  background: #ffb7b7; /* Change the background color of the highlight */
-  color: black;      /* Change the color of the selected text */
+  background: #111; /* Change the background color of the highlight */
+  color: f7f7f7;      /* Change the color of the selected text */
   text-shadow: none; /* Optional: remove any text shadow on selection */
 }
 
