@@ -226,6 +226,37 @@ a:hover {
     border-bottom-color: transparent; /* Disable underline for this specific link type */
 }
 
+
+header {
+    height: 60px;
+    border-bottom: 1px solid var(--accent-line);
+    padding: 0 1.5rem;
+}
+
+header p {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 60px;
+    margin: 0;
+    color: var(--text-primary);
+    z-index: 10;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
+
+header p a {
+    color: var(--text-primary);
+    text-decoration: none;
+    border: none;
+}
+
+header p span.tagline {
+    color: var(--text-secondary);
+}
+
+
 /* --- 7. HOME PAGE COMPONENTS --- */
 .hero {
     padding-top: var(--spacing-lg);
@@ -288,6 +319,10 @@ a:hover {
     transform: translateY(-4px); /* Subtle movement */
 }
 
+.case-study-images img {
+    width: 100%;
+}
+
 .cs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -342,6 +377,8 @@ a:hover {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
     border-bottom: 1px solid var(--accent-line);
+
+        display: none;
 }
 
 .meta-item strong {
@@ -600,12 +637,21 @@ font-family: var(--font-mono);
 }
 
 /* Case study page: sectioned layout */
+
+.case-study-hero {
+    width: 100%;
+}
+.case-study-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
 .case-study-section {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    gap: 9rem;
-    margin-bottom: 4rem;
-    align-items: stretch;
+    max-width: 800px;
+    margin: 0 auto 4rem;
 }
 
 .header-section {
@@ -802,8 +848,93 @@ font-family: var(--font-mono);
 
 .case-study-container {
     margin: 0 auto;
-    padding: 0 4rem;
+    padding: 0 1.5rem;
 }
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 20px; /* Spacing between columns */
+}
+
+
+a.project {
+    margin: 0 0 2rem 0;
+    display: block;
+    border-bottom: none;
+    transition: all 0.2s ease;
+}
+a.project:hover {
+    background: none;
+    opacity: 0.7;
+}
+
+.project-details {
+    overflow: hidden;
+    padding: 0 0 2.5rem 0;
+}
+
+.project-img {
+  border-radius: 6px;
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  position: relative;
+  margin: 0 0 0;
+  height: auto;
+}
+.project-img.padded {
+    padding: 40px;
+}
+
+.project-img img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 0;
+    display: block;
+}
+
+.project h3 {
+    font-family: var(--font-body);
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    max-width: 95%;
+    margin: 1rem 0 0.5rem 0;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+ul.meta {
+    position: relative;
+}
+
+.project ul.meta li {
+    list-style: none;
+    padding: 0 1rem 0 0;
+    margin: 0 1rem 0 0;
+    display: inline;
+    float: left;
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+.project ul.meta li::before {
+    content: none;
+}
+
+.project ul.meta li::after {
+    content: "•";
+    position: absolute;
+    right: -0.25rem;
+    color: var(--text-tertiary);
+    font-weight: 400;
+}
+
 
 /* --- 12. TERMINAL INDEX --- */
 

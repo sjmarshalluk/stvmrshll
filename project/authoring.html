@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Marshall | Design + Strategy</title>
+    <link href="../stylesheets/site.css" rel="stylesheet" />
+    <link href="./images/favicon.png" rel="icon" type="image/png" />
+
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQTC3NEETR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QQTC3NEETR');
+</script>
+</head>
+<body>
+    <header>
+        <p class="headline"><a href="index.html">stvmrshll</a> <span class="tagline">Design + Strategy</span></p>
+        
+    </header>
+
+    <main class="case-study-container">
+
+
+        <div class="case-study-hero" style="width: 100%;">
+                    <img src="../imgs/spark/hero.png" alt="Workshops">
+                </div>
+            
+
+        <div class="case-study-section">
+            
+            <div class="section-text">
+                
+
+                <p class="intro">
+                    Navigating cross-organizational complexity to define the spatial data architecture required to bring world-scale AR to the Metaverse.    
+                </p>
+
+                <div class="memo-meta" style="margin-top: 2rem;">
+                    <div class="meta-item">
+                        <strong>Role</strong>
+                        <span>Co-Project Lead / <br/>Design Lead</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Team</strong>
+                        <span>Me + PM <br/>(before building team around concept)</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Output</strong>
+                        <span>Near-term roadmap + future product direction</span>
+                    </div>
+                </div>
+
+
+                <h3>Overview</h3>
+
+                <p>Pioneering the creation of location-based AR effects for the Metaverse by defining the spatial data requirements and cross-org integration strategy for Meta’s Spark AR platform.</p>
+                
+                <h3>Context</h3>
+                <p>As part of Meta's broader push toward the Metaverse, the company wanted to expand its AR capabilities beyond users' living rooms and into public, city-scale locations (e.g., the Manhattan skyline, Seattle alleyways). While the Spark AR platform was already well-established for creating face filters and indoor effects, world-scale AR was entirely uncharted territory. Sitting on the Mapping team, I was tasked with leading the design efforts to integrate this massive new capability into Spark AR—a platform our team did not own.</p>
+
+                <h3>Opportunity</h3>
+
+                <p>Design a strategic integration framework to:</p>
+                <ul class="bullets">
+                    <li>Define the exact 3D spatial data (meshes) required for creators to build effects anchored to real-world architecture.</li>
+                    <li>Integrate this new capability into the Spark AR platform with minimal friction and zero disruption to their existing UX.</li>
+                    <li>Establish the foundational safety and spatial constraints required for public AR viewing.</li>
+                </ul>
+
+                <h3>Challenge</h3>
+
+                <p>The project was immediately hit with compounding organizational and technical roadblocks:</p>
+                <ul class="bullets">
+                    <li>The Org-Chart Friction: Because we didn't own Spark AR, any proposed UI changes required intense negotiation and had to demand near-zero engineering effort from their team.</li>
+                    <li>The Engineering Disconnect: Our engineering team was highly motivated to use emerging photogrammetry tech to automatically generate dense point-cloud meshes of cities. It was highly scalable, but I knew immediately it would be completely unusable for creators trying to anchor precise 3D effects.</li>
+                    <li>The Safety Constraints: Public AR introduced unprecedented safety risks. We had to figure out how to communicate spatial viewing limitations (e.g., preventing users from standing in traffic) directly to the creator within the 3D canvas.</li>
+                </ul>
+
+                
+
+                <h3>Approach</h3>
+
+                <p>I had to pivot from designing interfaces to active consensus-building, using custom tooling to bridge the gap between engineering assumptions and creator realities:</p>
+                <ul class="bullets">
+                    <li>I designed and facilitated cross-functional workshops with internal creators to definitively prove that photogrammetric meshes lacked the architectural clarity required for effect anchoring.</li>
+                    <li>To break the engineering team's resistance, I independently built a lightweight 3D prototyping tool using Mapbox JS and OpenStreetMap data.</li>
+                    <li>I used this custom tool to run a collaborative workshop where engineers and creators could "design" their ideal mesh together. This exercise successfully built deep empathy, shifting the engineers away from photogrammetry and toward a creator-first mesh generation strategy.</li>
+                </ul>
+
+                <div class="case-study-images">
+                    <img src="../imgs/spark/tool.png" alt="Hero" loading="lazy" />
+                </div>
+
+
+                <h3>Execution</h3>
+
+                <p>With the engineering team aligned on the right technical approach, I defined the final spatial requirements and the platform integration strategy:</p>
+                <ul class="bullets">
+                    <li>Established a hybrid mesh architecture: high-fidelity geometric reconstruction for the core landmark, supported by low-fidelity OSM building data for the surrounding context.</li>
+                    <li>Defined critical safety "zones" within the 3D canvas to visually communicate viewing limitations to creators.</li>
+                    <li>Negotiated a heavily MVP integration with the Spark AR team, intentionally stripping back our feature requests to ensure core functionality launched without interfering with their existing product roadmap.</li>
+                </ul>
+
+                <div class="case-study-images">
+                    <img src="../imgs/spark/requirements.png" alt="Hero" loading="lazy" />
+                </div>
+
+                <h3>Outcome</h3>
+
+                <p>While a sudden shift in company-wide Metaverse priorities ultimately paused the project just prior to launch, the strategic groundwork was complete and highly impactful:</p>
+                <ul class="bullets">
+                    <li>Defined the Standard: Produced the first fully defined, creator-tested requirements for world-scale AR meshes within Meta.</li>
+                    <li>Overcame Org Silos: Successfully built a collaborative bridge between the Mapping and Spark AR organizations, paving the way for future cross-platform integrations.</li>
+                    <li>Prevented Technical Debt: Saved the engineering team from building a highly scalable but ultimately useless photogrammetry pipeline, redirecting efforts toward a viable, creator-first solution.</li>
+
+                
+            </div>
+        </div>
+    
+
+<footer>
+            <a href="capture.html">← Back: Automating VR Room Capture</a>
+            <a href="../index.html">To Index →</a>
+        </footer>
+
+        
+
+    </main>
+
+
+</body>
+</html>

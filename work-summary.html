@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stephen Marshall — Product Design</title>
+  <style>
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-secondary: #666;
+      --color-bg: #fff;
+      --color-border: #e0e0e0;
+      --color-accent: #1a1a1a;
+      --color-highlight: #f5f5f5;
+      --nav-width: 270px;
+      --content-max: 900px;
+      --font-sans: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-sz-body: 0.9375rem;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===========================================
+       INTRO - Static intro at top
+       =========================================== */
+    .intro {
+      padding: 10rem 4rem;
+      max-width: calc(var(--content-max) + 8rem);
+      margin: 0 auto;
+    }
+
+    .intro__name {
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      margin-bottom: 2rem;
+    }
+
+    .intro__text {
+      font-size: 1.75rem;
+      line-height: 1.5;
+      font-weight: 400;
+      color: var(--color-text);
+      max-width: 700px;
+    }
+
+    /* Desktop Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--nav-width) 1fr;
+      min-height: 100vh;
+    }
+
+    /* Side Navigation - Initially hidden, slides in on scroll, vertically centered */
+    .side-nav {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) translateX(-100%);
+      width: var(--nav-width);
+      padding: 2rem 0 2rem 2.5rem;
+      background: var(--color-bg);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .side-nav.is-visible {
+      transform: translateY(-50%) translateX(0);
+      opacity: 1;
+    }
+
+    .side-nav__title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .side-nav__list {
+      list-style: none;
+    }
+
+    .side-nav__item {
+      margin-bottom: 0.75rem;
+    }
+
+    .side-nav__link {
+      display: block;
+      padding: 0.5rem 0;
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      line-height: 1.4;
+      transition: color 0.15s ease;
+      position: relative;
+      padding: 0.5rem 0.75rem;
+      background-color: var(--color-bg);
+      border-radius: 10px;
+    }
+
+    .side-nav__link:hover {
+      color: var(--color-text);
+    }
+
+    .side-nav__link.is-active {
+      color: var(--color-text);
+      font-weight: 600;
+      background-color: var(--color-highlight);
+    }
+/*
+    .side-nav__link.is-active::before {
+      content: "";
+      position: absolute;
+      left: -1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 1rem;
+      background: var(--color-accent);
+    }
+*/
+    /* Mobile Navigation */
+    .mobile-nav {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem;
+    }
+
+    .mobile-nav__label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .mobile-nav__select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      font-family: var(--font-sans);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      background: var(--color-bg);
+      color: var(--color-text);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+    }
+
+    /* Main Content */
+    .main-content {
+      grid-column: 2;
+      padding: 3rem 4rem;
+      max-width: calc(var(--content-max) + 8rem);
+      margin: 0 auto;
+    }
+
+    /* Layout starts full-width, shifts when nav appears */
+    .layout {
+      transition: grid-template-columns 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .layout:not(.nav-visible) {
+      grid-template-columns: 0 1fr;
+    }
+
+    .layout.nav-visible {
+      grid-template-columns: var(--nav-width) 1fr;
+    }
+
+    /* Section */
+    .section {
+      padding: 8rem 0;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section:first-of-type {
+      padding-top: 4rem;
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    /* Panel A: Section Intro */
+    .section__intro {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+    }
+
+    .section__headline {
+      font-size: 1.75rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section__subline {
+      font-size: 1.125rem;
+      color: var(--color-text-secondary);
+      max-width: 640px;
+      line-height: 1.5;
+    }
+
+    /* Panel B: Skills */
+    .section__skills {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+    }
+
+    .panel-label {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem 2rem;
+    }
+
+    .skills-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .skills-list li {
+      font-size: 1.125rem;
+      padding: 0 0;
+      color: var(--color-text-secondary);
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .skills-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 4px;
+      height: 4px;
+      background: var(--color-text-secondary);
+      border-radius: 50%;
+    }
+
+    /* Panel C: Work */
+    .section__work {
+      /* No bottom border needed */
+    }
+
+    /* Work Grid - flexbox for horizontal accordion */
+    .work-grid {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    /* Project Tile */
+    .project-tile {
+      flex: 1;
+      min-width: 0;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      margin: 0;
+    }
+
+    .project-tile:hover {
+      opacity: 0.85;
+    }
+
+    .project-tile.is-expanded:hover {
+      opacity: 1;
+    }
+
+    /* When a tile is expanded, it grows and others shrink */
+    .work-grid.has-expanded .project-tile {
+      flex: 0.5;
+    }
+
+    .work-grid.has-expanded .project-tile.is-expanded {
+      flex: 3;
+    }
+
+    .work-grid.has-expanded .project-tile:not(.is-expanded) {
+      opacity: 0.7;
+    }
+
+    .work-grid.has-expanded .project-tile:not(.is-expanded) .project-tile__content {
+      opacity: 0;
+    }
+
+    .work-grid.has-expanded .project-tile:not(.is-expanded):hover {
+      opacity: 0.9;
+    }
+
+    /* Expanded tile layout - horizontal with visual on left, content on right */
+    .project-tile.is-expanded {
+      
+      grid-template-columns: 280px 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 0 1.5rem;
+      border-radius: 10px;
+      margin: -30px;
+      z-index: 10;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.2);
+    }
+  .project-tile.is-expanded:focus,
+  .project-tile:focus {
+    outline: none;
+  }
+
+    .project-tile.is-expanded .project-tile__visual {
+      grid-row: 1 / -1;
+      height: 430px;
+      padding: 20px;
+    }
+
+    .project-tile.is-expanded .project-tile__content {
+      align-self: start;
+      padding: 1rem;
+    }
+
+    .project-tile.is-expanded .project-tile__name {
+      font-size: 1rem;
+    }
+
+    .project-tile.is-expanded .project-tile__details {
+      grid-column: 2;
+      align-self: start;
+      padding: 1rem;
+    }
+
+    /* Expanded details */
+    .project-tile__details {
+      display: none;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .project-tile.is-expanded .project-tile__details {
+      display: block;
+    }
+
+    .project-tile__details ul {
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+
+    .project-tile__details li {
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+      padding: 0.25rem 0;
+      padding-left: 0.875rem;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .project-tile__details li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.625rem;
+      width: 4px;
+      height: 4px;
+      background: var(--color-text-secondary);
+      border-radius: 50%;
+    }
+
+    .project-tile__close {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: auto;
+    }
+
+    .project-tile__close:hover {
+      color: var(--color-text);
+    }
+
+    /* Non-expanded tiles hide their details */
+    .project-tile:not(.is-expanded) .project-tile__details {
+      display: none;
+    }
+
+    .project-tile__visual {
+      /*aspect-ratio: 16 / 9;*/
+      height: 400px;
+      background: #f5f5f5;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-tile__visual svg {
+      width: 60%;
+      height: 60%;
+      opacity: 0.15;
+    }
+
+    .project-tile__visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .project-tile__content {
+      padding: 1rem 0.25rem;
+    }
+
+    .project-tile__name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-tile__caption {
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+      display: none;
+    }
+
+    /* Slideshow Navigation - appears on expanded tile visual */
+    .slideshow-nav {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.95);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .project-tile.is-expanded .slideshow-nav {
+      display: flex;
+    }
+
+    .slideshow-nav__btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .slideshow-nav__btn:hover {
+      border-color: var(--color-text);
+      background: var(--color-highlight);
+    }
+
+    .slideshow-nav__btn svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .slideshow-nav__dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .slideshow-nav__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .slideshow-nav__dot.is-active {
+      background: var(--color-text);
+    }
+
+    .slideshow-nav__counter {
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      min-width: 3em;
+      text-align: center;
+    }
+
+    /* Hide slideshow nav when only 1 slide */
+    .slideshow-nav.single-slide {
+      display: none !important;
+    }
+
+    /* Hide old slideshow container in details */
+    .project-tile__details .slideshow {
+      display: none;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 900px) {
+      .intro {
+        padding: 2rem 1.5rem;
+      }
+
+      .intro__name {
+        font-size: 0.75rem;
+      }
+
+      .intro__text {
+        font-size: 1.25rem;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      .layout:not(.nav-visible),
+      .layout.nav-visible {
+        grid-template-columns: 1fr;
+      }
+
+      .side-nav {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: block;
+      }
+
+      .main-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+
+      .section__headline {
+        font-size: 1.5rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .work-grid {
+        flex-direction: column;
+      }
+
+      .project-tile.is-expanded {
+        grid-template-columns: 1fr;
+      }
+
+      .project-tile.is-expanded .project-tile__visual {
+        grid-row: auto;
+        height: 200px;
+        margin-bottom: 1rem;
+      }
+
+      .project-tile.is-expanded .project-tile__details {
+        grid-column: 1;
+      }
+    }
+
+
+
+
+
+    /* Placeholder Visuals */
+    .visual-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-placeholder svg {
+      width: 50%;
+      height: auto;
+      opacity: 0.12;
+    }
+
+    /* ===========================================
+       PROJECT DECK - Full-width slideshow format
+       =========================================== */
+    .project-decks {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .project-deck {
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: #f2f2f2;
+      transition: box-shadow 0.2s ease;
+      border: 1px solid var(--color-border);
+    }
+
+     .project-deck.is-expanded {
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ===========================================
+       COLLAPSED INTRO STATE
+       =========================================== */
+    .project-deck__intro {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1rem 1rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .project-deck__intro:hover {
+      background: #eaeaea;
+    }
+
+    .project-deck.is-expanded .project-deck__intro {
+      cursor: default;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .project-deck.is-expanded .project-deck__intro:hover {
+      background: transparent;
+    }
+
+    .project-deck__intro-text {
+      font-size: 1.125rem;
+      line-height: 1.5;
+      color: var(--color-text);
+      max-width: 75%;
+      font-weight: 500;
+    }
+
+    .project-deck__intro-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    /* Slide nav in intro - hidden when collapsed */
+    .project-deck__intro-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      opacity: 0;
+      transform: translateX(10px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .project-deck.is-expanded .project-deck__intro-nav {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .project-deck__intro-nav-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+    }
+
+    .project-deck__intro-nav-btn:hover {
+      border-color: var(--color-text);
+      background: var(--color-highlight);
+      transform: scale(1.05);
+    }
+
+    .project-deck__intro-nav-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .project-deck__intro-counter {
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+      min-width: 3.5em;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .project-deck__intro-arrow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.2s ease;
+    }
+
+    .project-deck__intro-arrow:hover {
+      transform: scale(1.1);
+    }
+
+    .project-deck__intro-arrow svg {
+      width: 16px;
+      height: 16px;
+      color: white;
+      transition: transform 0.3s ease;a
+    }
+
+    /* Expanded state */
+    .project-deck.is-expanded .project-deck__intro-arrow {
+      transform: rotate(180deg);
+    }
+
+    .project-deck.is-expanded .project-deck__intro-arrow:hover {
+      transform: rotate(180deg) scale(1.1);
+    }
+
+    /* Slides container - hidden when collapsed */
+    .project-deck__slides {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-deck.is-expanded .project-deck__slides {
+      grid-template-rows: 1fr;
+    }
+
+    .project-deck__slides-inner {
+      overflow: hidden;
+    }
+
+    .project-deck__slide {
+      display: none;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-deck__slide.is-active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Text header at top */
+    .project-deck__header {
+      padding: 1.5rem;
+      min-height: 100px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .project-deck__text {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--color-text);
+      max-width: 700px;
+      margin: 0;
+    }
+
+    /* Image below */
+    .project-deck__image {
+      width: 100%;
+      height: 500px;
+      padding:  0;
+      overflow: hidden;
+    }
+
+    .project-deck__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0px;
+    }
+
+    /* Deck Navigation */
+    .project-deck__nav {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0;
+      z-index: 10;
+      top: 35px;
+      right: 10px;
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.3s ease 0.2s;
+    }
+
+    /* Hide nav when collapsed (for collapsible decks) */
+    .project-deck:has(.project-deck__intro):not(.is-expanded) .project-deck__nav {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .project-deck__nav-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .project-deck__nav-btn:hover {
+      border-color: var(--color-text);
+      background: var(--color-highlight);
+    }
+
+    .project-deck__nav-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .project-deck__nav-dots {
+      /*display: flex;*/
+      display: none;
+      gap: 0.5rem;
+    }
+
+    .project-deck__nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .project-deck__nav-dot.is-active {
+      background: var(--color-text);
+    }
+
+    .project-deck__nav-counter {
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+      min-width: 3em;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Mobile adjustments for decks */
+    @media (max-width: 900px) {
+      .project-deck__content {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .project-deck__title {
+        font-size: 1.125rem;
+      }
+
+      .project-deck__nav {
+        right: 1rem;
+        bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Intro Section -->
+  <section class="intro" id="intro">
+    <div class="intro__name">STV MRSHLL</div>
+    <p class="intro__text">Hi, I'm Steve. I'm a product designer who helps teams navigate ambiguity, align on direction, and ship thoughtful products.</p>
+  </section>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" aria-label="Section navigation">
+    <div class="mobile-nav__label">Sections</div>
+    <select class="mobile-nav__select" id="mobile-nav-select">
+      <option value="#discovery">Product Discovery & 0→1 Definition</option>
+      <option value="#systems">Systems & Platform Design</option>
+      <option value="#strategy">Product Strategy & Direction-Setting</option>
+      <option value="#decisions">Decision Systems & Team Alignment</option>
+      <option value="#execution">High-Quality Product Execution</option>
+      <option value="#geospatial">Maps, Spatial Data & Geospatial Design</option>
+    </select>
+  </nav>
+
+  <div class="layout">
+    <!-- Side Navigation -->
+    <nav class="side-nav" aria-label="Section navigation">
+
+      <ul class="side-nav__list">
+        <li class="side-nav__item">
+          <a href="#strategy" class="side-nav__link">Product Strategy & Direction-Setting</a>
+        </li>
+        <li class="side-nav__item">
+          <a href="#alignment" class="side-nav__link">Decision Systems & Team Alignment</a>
+        </li>
+        <li class="side-nav__item">
+          <a href="#discovery" class="side-nav__link is-active">Product Discovery & 0→1 Definition</a>
+        </li>
+        <li class="side-nav__item">
+          <a href="#systems" class="side-nav__link">Systems & Platform Design</a>
+        </li>
+        <li class="side-nav__item">
+          <a href="#execution" class="side-nav__link">High-Quality Product Execution</a>
+        </li>
+        <li class="side-nav__item">
+          <a href="#geospatial" class="side-nav__link">Maps, Spatial Data & Geospatial Design</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+      <!-- Section 3: Direction, Strategy & Alignment -->
+      <section class="section" id="strategy">
+        <div class="panel-label">Product Strategy & Direction-Setting</div>
+        <!-- Panel A: Intro -->
+        <div class="section__intro">
+          <h2 class="section__headline">Setting direction by designing how decisions get made.</h2>
+          <p class="section__subline">I help teams navigate ambiguity by aligning people, context, and constraints into clear strategic direction—and the decision systems to sustain it.</p>
+          <ul class="skills-list">
+              <li>Product vision & strategic framing</li>
+              <li>Opportunity definition & prioritization</li>
+              <li>Decision flow & ownership modeling</li>
+              <li>Strategic documentation & shared artifacts</li>
+              <li>Mental model design</li>
+              <li>Cross-functional alignment & facilitation</li>
+            </ul>
+        </div>
+
+        <!-- Panel B: Skills -->
+        <div class="section__skills" style="display: none;">
+          <div class="panel-label">Core skills</div>
+          <div class="skills-grid">
+            <ul class="skills-list">
+              <li>Product vision & strategic framing</li>
+              <li>Opportunity definition & prioritization</li>
+              <li>Decision flow & ownership modeling</li>
+              <li>Strategic documentation & shared artifacts</li>
+              <li>Mental model design</li>
+              <li>Cross-functional alignment & facilitation</li>
+            </ul>
+          </div>
+        </div>
+
+
+
+        <div class="section__work">
+          <div class="panel-label">Project Snippets</div>
+
+          <div class="project-decks">
+            <div class="project-deck" id="deck-strategy-1"></div>
+            <div class="project-deck" id="deck-strategy-2"></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Section: Decision Systems & Team Alignment -->
+      <section class="section" id="alignment">
+        <div class="panel-label">Decision Systems & Team Alignment</div>
+        <!-- Panel A: Intro -->
+        <div class="section__intro">
+          <h2 class="section__headline">Designing how teams make decisions—clearly, together, and at scale.</h2>
+          <p class="section__subline">When teams slow down, it’s rarely a talent problem. It’s a clarity problem. I design the systems that make progress possible.</p>
+
+          <ul class="skills-list">
+            <li>Decision flow & ownership modeling</li>
+            <li>Strategic documentation & shared artifacts</li>
+            <li>Mental model design</li>
+            <li>Cross-functional facilitation</li>
+            <li>Process design for discovery & delivery</li>
+            <li>AI-assisted workflows & tooling</li>
+
+          </ul>
+        </div>
+        <div class="section__work">
+          <div class="panel-label">Project Snippets</div>
+          <div class="project-decks">
+            <div class="project-deck" id="deck-alignment-1"></div>
+            <div class="project-deck" id="deck-alignment-2"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Product Discovery & 0→1 Definition -->
+      <section class="section" id="discovery">
+        <div class="panel-label">Product Discovery & 0→1 Definition</div>
+        <div class="section__intro">
+          <h2 class="section__headline">Turning ambiguity into clear product direction.</h2>
+          <p class="section__subline">Helping teams move from loose ideas and unknowns to well-framed problems, tested concepts, and confident early bets.</p>
+          <ul class="skills-list">
+            <li>Problem framing & hypothesis design</li>
+            <li>Discovery workshops & facilitation</li>
+            <li>Rapid prototyping & concept validation</li>
+            <li>Qualitative research & synthesis</li>
+            <li>Early product shaping under uncertainty</li>
+          </ul>
+        </div>
+        <div class="section__work">
+          <div class="panel-label">Project Snippets</div>
+          <div class="project-decks">
+            <div class="project-deck" id="deck-discovery-1"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Systems & Platform Design -->
+      <section class="section" id="systems">
+        <div class="panel-label">Systems & Platform Design</div>
+        <div class="section__intro">
+          <h2 class="section__headline">Designing products that work as coherent systems.</h2>
+          <p class="section__subline">Specializing in cross-product experiences where success depends on shared mental models and long-term evolution.</p>
+          <ul class="skills-list">
+            <li>Systems modeling & abstraction</li>
+            <li>Cross-product experience design</li>
+            <li>Platform mental models</li>
+            <li>Designing for scale and change</li>
+            <li>Navigating organizational complexity</li>
+          </ul>
+        </div>
+        <div class="section__work">
+          <div class="panel-label">Project Snippets</div>
+          <div class="project-decks">
+            <div class="project-deck" id="deck-systems-1"></div>
+            <div class="project-deck" id="deck-systems-2"></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Section 5: High-Quality Product Execution -->
+      <section class="section" id="execution">
+        <div class="panel-label">High-Quality Product Execution</div>
+        <div class="section__intro">
+          <h2 class="section__headline">Shipping thoughtful products under real-world constraints.</h2>
+          <p class="section__subline">Delivering high-quality UX in regulated, data-dense, and technically complex environments.</p>
+          <ul class="skills-list">
+            <li>Interaction design & UX architecture</li>
+            <li>Design systems application</li>
+            <li>Accessibility & inclusive design</li>
+            <li>Engineering collaboration</li>
+            <li>Quality at scale</li>
+          </ul>
+        </div>
+        <div class="project-decks">
+          <div class="project-deck" id="deck-execution-1"></div>
+          <div class="project-deck" id="deck-execution-2"></div>
+        </div>
+      </section>
+
+      <!-- Section 6: Maps, Spatial Data & Geospatial Design -->
+      <section class="section" id="geospatial">
+        <div class="panel-label">Maps, Spatial Data & Geospatial Design</div>
+        <div class="section__intro">
+          <h2 class="section__headline">Designing with geography, space, and location at the core.</h2>
+          <p class="section__subline">Maps are systems, not just visuals. This work makes spatial data legible and useful.</p>
+          <ul class="skills-list">
+            <li>Geospatial data abstraction</li>
+            <li>Cartographic design</li>
+            <li>Spatial UX patterns</li>
+            <li>Tooling (QGIS, Mapbox, etc.)</li>
+          </ul>
+        </div>
+        <div class="project-decks">
+          <div class="project-deck" id="deck-geospatial-1"></div>
+          <div class="project-deck" id="deck-geospatial-2"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // ===========================================
+    // NAV REVEAL ON SCROLL
+    // ===========================================
+    const intro = document.querySelector('.intro');
+    const sideNav = document.querySelector('.side-nav');
+    const layout = document.querySelector('.layout');
+    const contentSections = document.querySelectorAll('.section');
+
+    // Intersection Observer for intro - triggers nav reveal when scrolled past
+    const introObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Intro is in view - hide nav
+          sideNav.classList.remove('is-visible');
+          layout.classList.remove('nav-visible');
+        } else {
+          // Scrolled past intro - show nav
+          sideNav.classList.add('is-visible');
+          layout.classList.add('nav-visible');
+        }
+      });
+    }, {
+      threshold: 0
+    });
+
+    introObserver.observe(intro);
+
+    // Intersection Observer for sections - fade in as they enter
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -10% 0px'
+    });
+
+    contentSections.forEach(section => {
+      sectionObserver.observe(section);
+    });
+
+    // Mobile navigation
+    const mobileSelect = document.getElementById('mobile-nav-select');
+    mobileSelect.addEventListener('change', (e) => {
+      const target = document.querySelector(e.target.value);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // Card slideshow functionality - image and caption change together
+    function initCardSlideshow(tile) {
+      const data = projectData[tile.id];
+      if (!data || !data.slides || data.slides.length === 0) return;
+
+      const images = data.slides.map(s => s.image).filter(img => img);
+      const captions = data.slides.map(s => s.caption);
+
+      if (images.length === 0) return;
+
+      const visual = tile.querySelector('.project-tile__visual');
+      const nameEl = tile.querySelector('.project-tile__name');
+
+      // Store original values
+      tile._originalImage = visual.querySelector('img')?.src || '';
+      tile._originalName = nameEl.textContent;
+      tile._currentIndex = 0;
+      tile._images = images;
+      tile._captions = captions;
+
+      // Create navigation if more than 1 slide
+      let nav = tile.querySelector('.slideshow-nav');
+      if (!nav) {
+        nav = document.createElement('div');
+        nav.className = 'slideshow-nav' + (images.length <= 1 ? ' single-slide' : '');
+        nav.innerHTML = `
+          <button class="slideshow-nav__btn slideshow-nav__btn--prev" aria-label="Previous">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="slideshow-nav__dots">
+            ${images.map((_, i) => `<span class="slideshow-nav__dot ${i === 0 ? 'is-active' : ''}" data-index="${i}"></span>`).join('')}
+          </div>
+          <button class="slideshow-nav__btn slideshow-nav__btn--next" aria-label="Next">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <span class="slideshow-nav__counter">1 / ${images.length}</span>
+        `;
+        visual.appendChild(nav);
+      }
+
+      // Update to first slide
+      updateSlide(tile, 0);
+
+      // Add event listeners
+      const prevBtn = nav.querySelector('.slideshow-nav__btn--prev');
+      const nextBtn = nav.querySelector('.slideshow-nav__btn--next');
+      const dots = nav.querySelectorAll('.slideshow-nav__dot');
+
+      prevBtn.onclick = (e) => {
+        e.stopPropagation();
+        const newIndex = (tile._currentIndex - 1 + images.length) % images.length;
+        updateSlide(tile, newIndex);
+      };
+
+      nextBtn.onclick = (e) => {
+        e.stopPropagation();
+        const newIndex = (tile._currentIndex + 1) % images.length;
+        updateSlide(tile, newIndex);
+      };
+
+      dots.forEach(dot => {
+        dot.onclick = (e) => {
+          e.stopPropagation();
+          updateSlide(tile, parseInt(dot.dataset.index));
+        };
+      });
+    }
+
+    function updateSlide(tile, index) {
+      const visual = tile.querySelector('.project-tile__visual');
+      const nameEl = tile.querySelector('.project-tile__name');
+      const img = visual.querySelector('img');
+      const nav = tile.querySelector('.slideshow-nav');
+
+      tile._currentIndex = index;
+
+      // Update image
+      if (img && tile._images[index]) {
+        img.src = tile._images[index];
+      }
+
+      // Update caption if available
+      if (tile._captions[index]) {
+        nameEl.textContent = tile._captions[index];
+      }
+
+      // Update nav dots and counter
+      if (nav) {
+        nav.querySelectorAll('.slideshow-nav__dot').forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === index);
+        });
+        const counter = nav.querySelector('.slideshow-nav__counter');
+        if (counter) {
+          counter.textContent = `${index + 1} / ${tile._images.length}`;
+        }
+      }
+    }
+
+    function destroyCardSlideshow(tile) {
+      // Restore original image and caption
+      const visual = tile.querySelector('.project-tile__visual');
+      const nameEl = tile.querySelector('.project-tile__name');
+      const img = visual.querySelector('img');
+
+      if (tile._originalImage && img) {
+        img.src = tile._originalImage;
+      }
+      if (tile._originalName) {
+        nameEl.textContent = tile._originalName;
+      }
+
+      // Remove navigation
+      const nav = tile.querySelector('.slideshow-nav');
+      if (nav) nav.remove();
+
+      // Clear stored data
+      delete tile._originalImage;
+      delete tile._originalName;
+      delete tile._currentIndex;
+      delete tile._images;
+      delete tile._captions;
+    }
+
+    // Project tile click handlers - horizontal accordion
+    document.querySelectorAll('.project-tile').forEach(tile => {
+      tile.addEventListener('click', (e) => {
+        // Don't toggle if clicking close button or slideshow controls
+        if (e.target.closest('.project-tile__close') ||
+            e.target.closest('.slideshow-nav__btn') ||
+            e.target.closest('.slideshow-nav__dot')) {
+          return;
+        }
+
+        const isExpanded = tile.classList.contains('is-expanded');
+        const grid = tile.closest('.work-grid');
+
+        // Close any currently expanded tile in this grid
+        grid.querySelectorAll('.project-tile.is-expanded').forEach(t => {
+          t.classList.remove('is-expanded');
+          t.setAttribute('aria-expanded', 'false');
+          destroyCardSlideshow(t);
+        });
+
+        if (isExpanded) {
+          // Just close - already handled above
+          grid.classList.remove('has-expanded');
+        } else {
+          // Expand this tile
+          tile.classList.add('is-expanded');
+          tile.setAttribute('aria-expanded', 'true');
+          grid.classList.add('has-expanded');
+
+          // Initialize card slideshow
+          initCardSlideshow(tile);
+        }
+      });
+
+      tile.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          tile.click();
+        }
+      });
+    });
+
+    // Close button handlers
+    document.querySelectorAll('.project-tile__close').forEach(closeBtn => {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tile = closeBtn.closest('.project-tile');
+        const grid = tile.closest('.work-grid');
+
+        tile.classList.remove('is-expanded');
+        tile.setAttribute('aria-expanded', 'false');
+        grid.classList.remove('has-expanded');
+        destroyCardSlideshow(tile);
+      });
+    });
+
+    // Active navigation on scroll
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.side-nav__link');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+
+          // Update side nav
+          navLinks.forEach(link => {
+            link.classList.remove('is-active');
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('is-active');
+            }
+          });
+
+          // Update mobile select
+          mobileSelect.value = `#${id}`;
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+
+    // ===========================================
+    // DECK DATA - Edit slide content here
+    // ===========================================
+    const deckData = {
+      // Strategy Section
+      'deck-strategy-1': {
+        collapsible: true,
+        intro: 'Establishing a cross-product vision for maps at Outside',
+        slides: [
+          { 
+            text: 'The challenge: Many of Outside’s products utilize maps in some way, but there was no shared vision or strategic framework for how they relate.', 
+            image: 'imgs/outside-maps/apps.png' 
+          },
+          { 
+            text: 'We knew there were things that we might want to do in the future that were not possible', 
+            image: 'imgs/outside-maps/xxx.png' 
+          },
+          { 
+            text: 'I facilitated workshops to identify andunderstand requirements and future plans for each product', 
+            image: 'imgs/outside-maps/xxx.png' 
+          },
+          { 
+            text: 'From the findings I was able to create a vision', 
+            image: 'imgs/outside-maps/vision.png' 
+          },
+          { 
+            text: 'From this, we were able to map out future required services XXX. Allowing engineering teams to prioritize foundational work that would enable future product roadmaps, and product teams to identify opportunities for cross-product collaboration.', 
+            image: 'imgs/outside-maps/services.png' 
+          },
+          { 
+            text: 'Also align user experience.', 
+            image: 'imgs/outside-maps/anatomy.png' 
+          }
+        ]
+      },
+      'deck-strategy-2': {
+        collapsible: true,
+        intro: 'Determining the value of undertaking a major new initiative',
+        slides: [
+          { 
+            text: 'Outside has an ecosystem of products that are sold as a single subscription, yet the onboarding experience for each is inconsistent and siloed', 
+            image: 'imgs/onboarding/existing.png' 
+          },
+          { 
+            text: 'While this was recognized anecdotally, no individual product team were prioritizing onboarding, nor were there any cross-product incentives to align on a shared experience', 
+            
+          },
+          { 
+            text: 'In order to quantify the opportunity to establish alignment and investment in a cross-product onboarding experience, I developed metrics for each product to be tested against', 
+            image: 'imgs/onboarding/metrics.png' 
+          },
+          { 
+            text: 'Using these metrics, I was able to develop analytics dashboards that showed how improving onboarding could impact individual product growth, as well as the growth of the ecosystem as a whole', 
+            image: 'imgs/onboarding/analytics.png'
+          },
+          { 
+            text: 'This allowed us to make a data-informed decision to invest in a cross-product onboarding experience, and provided a way to measure its impact over time', 
+            image: 'imgs/onboarding/highlights.png' 
+          },
+          { 
+            text: 'Uncovered critical questions', 
+            image: 'imgs/onboarding/questions.png' 
+          }
+        ]
+      },
+      
+
+      // Alignment Section
+      'deck-alignment-1': {
+        collapsible: true,
+        intro: 'Developing a custom tool to aide cross-functional collaboration',
+        slides: [
+          {
+            text: 'Meta wanted to add the ability to create AR effects in Spark at city locations',
+            image: 'imgs/spark/spark.png'
+          },
+          {
+            text: 'To do this, they needed to figure out a scalable way to generate meshes for city locations that could be used to create AR effects',
+            image: 'imgs/spark/spark.png'
+          },
+          { 
+            text: 'The selected locations presented various challenges in terms of scale, obstructions, and health and safety', 
+            image: 'imgs/spark/city.png' 
+          },
+          { 
+            text: 'At the same time, there were still questions around how the meshes should be generated and what their requirements were', 
+            image: 'imgs/spark/meshes.png' 
+          },
+          { 
+            text: 'To overcome this ambiguity, I ran workshops using a custom tool I built that allowed stakeholders to design their own mesh + effect', 
+            image: 'imgs/spark/tool.png' 
+          },
+          { 
+            text: 'This allowed us to start to align on the requirements of the meshes to allow product, design, and engineering teams to make progress in parallel', 
+            image: 'imgs/spark/requirements.png' 
+          },
+          { 
+            text: 'Ultimately, we were able to create a solution that met the needs of the product while also being feasible to implement within the constraints of the project', 
+            image: 'imgs/spark/mesh-definition.png' 
+          }
+        ]
+      },
+      'deck-alignment-2': {
+        collapsible: true,
+        intro: 'Creating shared documentation systems for team alignment',
+        slides: [
+          {
+            text: 'Developing custom tools to aide collaboration and alignment to overcome ambiguity.',
+            image: 'images/capture/docs1.png'
+          },
+          { 
+            text: 'The challenge: Multiple stakeholders with competing priorities and no shared understanding of the opportunity space.', 
+            image: 'images/project/2.png' 
+          },
+          { 
+            text: 'I facilitated workshops to map the competitive landscape, identify unmet user needs, and articulate strategic trade-offs.', 
+            image: 'images/project/3.png' 
+          },
+          { 
+            text: 'The outcome: Leadership had a defensible basis for strategic choices, and teams were aligned on priorities.', 
+            image: 'images/outside/vision.png' 
+          }
+        ]
+      },
+
+      // Discovery Section
+      'deck-discovery-1': {
+        collapsible: true,
+        intro: 'AI-assisted workshop design and facilitation',
+        slides: [
+          {
+            text: 'When Outside acquired a travel booking platform, they wanted to explore new product opportunities that utilized the unique assets of the company',
+            image: 'imgs/travel/thumb.png'
+          },
+          {
+            text: 'There were already numerous ideas from leadership and various stakeholders, but there was no way to explore them in a structured way to make a decision on which to pursue',
+            image: 'imgs/travel/thumb.png'
+          },
+          { 
+            text: 'With minimal existing user understanding, and under pressure to deliver quickly, I worked with AI to first develop a set of personas to avoid ideas being driven by individual opinions', 
+            image: 'imgs/travel/personas.png' 
+          },
+          { 
+            text: 'During the first workshop, we developed the personas collaboratively to build a shared understanding of who we were looking to serve, then using these, we were able to identify and prioritize opportunities based on the potential value to our users and the business', 
+            image: 'imgs/travel/workshops.png' 
+          },
+          { 
+            text: 'After this session, we landed on a concept around travel itineraries. Utilizing AI, I was able to rapidly explore and prototype the idea to idenitify potential challenges and opportunities for the concept, and to prepare materials for the next workshop', 
+            image: 'imgs/travel/proto.png' 
+          },
+          { 
+            text: 'This enabled our subsequent workshop to be highly targeted - to validate the direction, explore the details, and align on next steps', 
+            image: 'imgs/travel/workshop3.png' 
+          },
+          { 
+            text: 'Within a week we had gone from too many ideas, to a developed and aligned-upon direction that was signed off by the CEO', 
+            image: 'imgs/travel/future.png' 
+          },
+          { 
+            text: 'While the speed likely limited the depth of exploration and may have biased towards those with most authority, the fact we were able to gain alignment from such a diverse group' 
+          }
+        ]
+      },
+      'deck-discovery-2': {
+        collapsible: true,
+        intro: 'Discovery to define scope for a 0→1 project',
+        slides: [
+          {
+            text: 'xxx',
+            image: 'imgs/bysm/xxx.png'
+          }
+        ]
+      },
+
+      // Systems Section
+      'deck-systems-1': {
+        collapsible: true,
+        intro: 'Developing a canonical onboarding experience for a product ecosystem',
+        slides: [
+          {
+            text: 'Having established the value of investing in a cross-product onboarding experience (see above), I led the design of a canonical onboarding flow that could be adapted and implemented across products',
+            image: 'xxx'
+          },
+          { 
+            text: 'I developed a strategic framework for how to approach onboarding across products, which allowed us to identify where individual products were at a more granular level, and where they needed to get to in order to align on a shared onboarding experience', 
+            image: 'imgs/onboarding/framework.png' 
+          },
+          { 
+            text: 'While each product had a desire to retain unique elements in their onboarding experience, we were able to identify common components and patterns that could be standardized across products to create a more cohesive experience for users', 
+            image: 'imgs/onboarding/3.png' 
+          },
+          { 
+            text: 'Using findings from the earlier strategic work, identified priorities - gaia first steps', 
+            image: 'imgs/onboarding/3.png' 
+          },
+          { 
+            text: 'Although we were not able to implement a shared onboarding experience across all products, we were able to make significant progress on aligning the user experience and establishing a roadmap for future work. ', 
+            image: 'imgs/onboarding/vision.png' 
+          }
+        ]
+      },
+      'deck-systems-2': {
+        collapsible: true,
+        intro: 'Establishing a shared mental model for how maps are constructed across products',
+        slides: [
+          { text: '<strong>Platform:</strong> Establishing a shared mental model for how maps are constructed and utilized across products', image: 'images/outside/map-thumb.png' },
+          { text: 'The challenge: Multiple stakeholders with competing priorities and no shared understanding of the opportunity space.', image: 'images/project/2.png' },
+          { text: 'I facilitated workshops to map the competitive landscape, identify unmet user needs, and articulate strategic trade-offs.', image: 'images/project/3.png' },
+          { text: 'The outcome: Leadership had a defensible basis for strategic choices, and teams were aligned on priorities.', image: 'images/outside/vision.png' }
+        ]
+      },
+
+      // Execution Section
+      'deck-execution-1': {
+        collapsible: true,
+        intro: 'Implementing a complex feature with challenging constraints',
+        slides: [
+          { 
+            text: 'Outside built a social feed to be implemented across all of their products - I was responsible for integrating it into Gaia', 
+            image: 'imgs/gaia/thumb.png' 
+          },
+          { 
+            text: 'The feed was built in isolation, and the integration was fairly prescribed - for example, it would be served via a webview in the app, and it must live on a Home tab', 
+            image: 'imgs/gaia/implementation.png' 
+          },
+          { 
+            text: 'Immediately we could see issues with this, so some feedback to the Feed team created an improved experience for Gaia users', 
+            image: 'imgs/gaia/recommendations.png' 
+          },
+          { 
+            text: 'Due to tech debt and engineering constraints, changes were forced to be kept to a minimum, but there were some key aspects to consider that the Feed team had not anticipated, such as privacy settings', 
+            image: 'imgs/gaia/visibility.png' 
+          },
+          { 
+            text: 'Other aspects of the experience also surfaced along the way that were not anticipated, such as the flow for interacting with different feed cards', 
+            image: 'imgs/gaia/destinations.png' 
+          },
+          { 
+            text: 'Alongside the MVP implementation, I worked on a more integrated experience that would allow for a more seamless and native-feeling experience', 
+            image: 'imgs/gaia/future.png' 
+          }
+        ]
+      },
+      'deck-execution-2': {
+        collapsible: true,
+        intro: 'Integrating AI into the design process',
+        slides: [
+          { 
+            text: 'When Outside started to explore the travel space, it came with a directive: explore how AI could help expedite the end-to-end process', 
+            image: 'imgs/travel/xxx.png' 
+          },
+          { 
+            text: 'There were two streams for the work - one focused on integrating a recently acquired OTA into the ecosystem, and the other focused on exploring new product opportunities in the travel space (see discovery project above)', 
+            image: 'imgs/travel/xxx.png' 
+          },
+          { 
+            text: 'For the OTA, we targeted a more extreme AI-assisted process, where we avoided any created of mockups. For this, I ran a hour long workshop to get everyone to align on what was needed. I synthesized the output with some high level design principles to help guide the implementation.', 
+            image: 'imgs/travel/xxx.png' 
+          },
+          { 
+            text: 'From this, the engineering team (themselves also utilizing AI) were able to build out the new front end for the OTA. While not perfect, it enough to then provide feedback against.', 
+            image: 'imgs/travel/xxx.png' 
+          },
+          { 
+            text: 'While the process was xxx', 
+            image: 'imgs/travel/xxx.png' 
+          }
+        ]
+      },
+
+      // Geospatial Section
+      'deck-geospatial-1': {
+        collapsible: true,
+        intro: 'Designing spatial experiences that make location data actionable',
+        slides: [
+          { text: '<strong>Spatial Experiences:</strong> xxx', image: 'images/capture/complete2.png' },
+          { text: 'The challenge: Multiple stakeholders with competing priorities and no shared understanding of the opportunity space.', image: 'images/project/2.png' },
+          { text: 'I facilitated workshops to map the competitive landscape, identify unmet user needs, and articulate strategic trade-offs.', image: 'images/project/3.png' },
+          { text: 'The outcome: Leadership had a defensible basis for strategic choices, and teams were aligned on priorities.', image: 'images/outside/vision.png' }
+        ]
+      },
+      'deck-geospatial-2': {
+        collapsible: true,
+        intro: 'Building platform mental models for map construction and utilization',
+        slides: [
+          { text: '<strong>Platform:</strong> Establishing a shared mental model for how maps are constructed and utilized across products', image: 'images/outside/map-thumb.png' },
+          { text: 'The challenge: Multiple stakeholders with competing priorities and no shared understanding of the opportunity space.', image: 'images/project/2.png' },
+          { text: 'I facilitated workshops to map the competitive landscape, identify unmet user needs, and articulate strategic trade-offs.', image: 'images/project/3.png' },
+          { text: 'The outcome: Leadership had a defensible basis for strategic choices, and teams were aligned on priorities.', image: 'images/outside/vision.png' }
+        ]
+      }
+    };
+
+    // ===========================================
+    // PROJECT DECK - Generate and control slides
+    // ===========================================
+    function generateDeck(deck) {
+      const data = deckData[deck.id];
+      if (!data || !data.slides || data.slides.length === 0) return;
+
+      const isCollapsible = data.collapsible === true;
+      const introText = data.intro || data.slides[0].text;
+      const slideCount = data.slides.length;
+
+      // Generate intro HTML with nav controls (for collapsible decks)
+      const introHTML = isCollapsible ? `
+        <div class="project-deck__intro">
+          <p class="project-deck__intro-text">${introText}</p>
+          <div class="project-deck__intro-controls">
+            <div class="project-deck__intro-nav">
+              <button class="project-deck__intro-nav-btn project-deck__intro-nav-btn--prev" aria-label="Previous slide">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <span class="project-deck__intro-counter">1 / ${slideCount}</span>
+              <button class="project-deck__intro-nav-btn project-deck__intro-nav-btn--next" aria-label="Next slide">
+                <svg viewBox="0 0 12 12" fill="none"><path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+            <div class="project-deck__intro-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+      ` : '';
+
+      // Generate slides HTML
+      const slidesHTML = data.slides.map((slide, i) => `
+        <div class="project-deck__slide${i === 0 ? ' is-active' : ''}">
+          
+          <div class="project-deck__image">
+            <img src="${slide.image}" alt="Slide ${i + 1}">
+          </div>
+          <div class="project-deck__header">
+            <p class="project-deck__text">${slide.text}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Generate nav HTML (for non-collapsible decks)
+      const navHTML = !isCollapsible ? `
+        <div class="project-deck__nav">
+          <button class="project-deck__nav-btn project-deck__nav-btn--prev" aria-label="Previous slide">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="project-deck__nav-dots"></div>
+          <button class="project-deck__nav-btn project-deck__nav-btn--next" aria-label="Next slide">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <span class="project-deck__nav-counter">1 / ${slideCount}</span>
+        </div>
+      ` : '';
+
+      // Wrap slides in container for collapsible animation
+      if (isCollapsible) {
+        deck.innerHTML = introHTML + `
+          <div class="project-deck__slides">
+            <div class="project-deck__slides-inner">
+              ${slidesHTML}
+            </div>
+          </div>
+        `;
+      } else {
+        deck.innerHTML = slidesHTML + navHTML;
+      }
+    }
+
+    function initDeckExpand(deck) {
+      const intro = deck.querySelector('.project-deck__intro');
+      const arrow = deck.querySelector('.project-deck__intro-arrow');
+      if (!intro || !arrow) return;
+
+      function expandDeck() {
+        // Close any other open decks within the same section only
+        const section = deck.closest('.section');
+        if (section) {
+          section.querySelectorAll('.project-deck.is-expanded').forEach(otherDeck => {
+            if (otherDeck !== deck) {
+              collapseDeck(otherDeck);
+            }
+          });
+        }
+        deck.classList.add('is-expanded');
+      }
+
+      function collapseDeck(targetDeck) {
+        targetDeck.classList.remove('is-expanded');
+        // Reset to first slide
+        resetToFirstSlide(targetDeck);
+      }
+
+      function resetToFirstSlide(targetDeck) {
+        const slides = targetDeck.querySelectorAll('.project-deck__slide');
+        const counter = targetDeck.querySelector('.project-deck__intro-counter');
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('is-active', i === 0);
+        });
+        if (counter) {
+          counter.textContent = `1 / ${slides.length}`;
+        }
+        // Reset the internal index
+        targetDeck._currentSlideIndex = 0;
+      }
+
+      // Toggle on arrow click
+      arrow.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (deck.classList.contains('is-expanded')) {
+          collapseDeck(deck);
+        } else {
+          expandDeck();
+        }
+      });
+
+      // Also allow clicking intro text to expand (but not collapse)
+      intro.addEventListener('click', (e) => {
+        if (!deck.classList.contains('is-expanded') && !e.target.closest('.project-deck__intro-nav')) {
+          expandDeck();
+        }
+      });
+    }
+
+    function initDeckNavigation(deck) {
+      const slides = deck.querySelectorAll('.project-deck__slide');
+      const isCollapsible = deck.querySelector('.project-deck__intro') !== null;
+
+      // Get nav elements based on deck type
+      const counter = deck.querySelector('.project-deck__intro-counter') || deck.querySelector('.project-deck__nav-counter');
+      const prevBtn = deck.querySelector('.project-deck__intro-nav-btn--prev') || deck.querySelector('.project-deck__nav-btn--prev');
+      const nextBtn = deck.querySelector('.project-deck__intro-nav-btn--next') || deck.querySelector('.project-deck__nav-btn--next');
+      const dotsContainer = deck.querySelector('.project-deck__nav-dots');
+
+      if (slides.length === 0 || !prevBtn || !nextBtn) return;
+
+      let currentIndex = 0;
+
+      // Create dots (only for non-collapsible decks)
+      if (dotsContainer) {
+        slides.forEach((_, i) => {
+          const dot = document.createElement('span');
+          dot.className = 'project-deck__nav-dot' + (i === 0 ? ' is-active' : '');
+          dot.addEventListener('click', () => goToSlide(i));
+          dotsContainer.appendChild(dot);
+        });
+      }
+
+      function goToSlide(index) {
+        slides[currentIndex].classList.remove('is-active');
+        currentIndex = index;
+        slides[currentIndex].classList.add('is-active');
+        updateNav();
+      }
+
+      function updateNav() {
+        if (dotsContainer) {
+          dotsContainer.querySelectorAll('.project-deck__nav-dot').forEach((dot, i) => {
+            dot.classList.toggle('is-active', i === currentIndex);
+          });
+        }
+        if (counter) {
+          counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+        }
+      }
+
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide((currentIndex - 1 + slides.length) % slides.length);
+      });
+
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide((currentIndex + 1) % slides.length);
+      });
+
+      // Keyboard navigation
+      deck.setAttribute('tabindex', '0');
+      deck.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goToSlide((currentIndex - 1 + slides.length) % slides.length);
+        if (e.key === 'ArrowRight') goToSlide((currentIndex + 1) % slides.length);
+      });
+    }
+
+    // Initialize all decks
+    document.querySelectorAll('.project-deck').forEach(deck => {
+      generateDeck(deck);
+      initDeckExpand(deck);
+      initDeckNavigation(deck);
+    });
+
+    // Auto-expand the first deck in each section on page load
+    document.querySelectorAll('.section').forEach(section => {
+      const firstDeck = section.querySelector('.project-deck');
+      if (firstDeck && firstDeck.querySelector('.project-deck__intro')) {
+        firstDeck.classList.add('is-expanded');
+      }
+    });
+  </script>
+</body>
+</html>

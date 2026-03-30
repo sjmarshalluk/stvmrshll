@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Marshall | Design + Strategy</title>
+    <link href="../stylesheets/site.css" rel="stylesheet" />
+    <link href="./images/favicon.png" rel="icon" type="image/png" />
+
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QQTC3NEETR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QQTC3NEETR');
+</script>
+</head>
+<body>
+    <header>
+        <p class="headline"><a href="index.html">stvmrshll</a> <span class="tagline">Design + Strategy</span></p>
+        
+    </header>
+
+    <main class="case-study-container">
+
+
+        <div class="case-study-hero" style="width: 100%;">
+                    <img src="../imgs/outside-maps/hero.png" alt="Workshops">
+                </div>
+            
+
+        <div class="case-study-section">
+            
+            <div class="section-text">
+                
+
+                <p class="intro">
+                    Architecting a centralized geospatial data platform to eliminate technical debt and enable cross-ecosystem product innovation.
+                </p>
+
+                <div class="memo-meta" style="margin-top: 2rem;">
+                    <div class="meta-item">
+                        <strong>Role</strong>
+                        <span>Co-Project Lead / <br/>Design Lead</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Team</strong>
+                        <span>Me + PM <br/>(before building team around concept)</span>
+                    </div>
+                    <div class="meta-item">
+                        <strong>Output</strong>
+                        <span>Near-term roadmap + future product direction</span>
+                    </div>
+                </div>
+
+
+                <h3>Overview</h3>
+
+                <p>Architecting the shared geospatial primitives and data layers for Outside's multi-brand ecosystem to eliminate technical duplication and enable cross-product experiences.</p>
+                
+                <h3>Context</h3>
+                <p>Outside's portfolio (including Gaia GPS, Trailforks, and MapMy) is fundamentally built around maps. Yet, despite geospatial data being our core competency, the organization treated maps as isolated, disposable features. There was no shared vocabulary across teams—concepts like "Layers," "Tracks," and "Waypoints" meant entirely different things depending on who you asked.</p>
+
+                <h3>Opportunity</h3>
+
+                <p>Design a platform-level architecture to:</p>
+                <ul class="bullets">
+                    <li>Stop the massive technical duplication of solving the same rendering and data storage problems three times over.</li>
+                    <li>Establish a universal "Map Anatomy" framework to act as a binding contract between Design and Engineering.</li>
+                    <li>Transition the company from building isolated app features to funding a centralized Maps Platform.</li>
+                </ul>
+
+                <h3>Challenge</h3>
+
+                <p>The core friction wasn't just technical; it was a "Tower of Babel" organizational problem. We couldn't just start designing screens or APIs. We had to completely decouple the "Experience" (what the user touches) from the "Functionality" (the data services) across fiercely independent product silos.</p>
+                
+
+                
+
+                <h3>Approach</h3>
+
+                <p>I stepped back from production design entirely to focus on system decomposition and conceptual modeling:</p>
+                <ul class="bullets">
+                    <li>Created the "Map Anatomy" framework, dividing the map ecosystem into two strict layers: The Experience Layer (UI containers, interactions, product-owned) and The Data Layer (Tilesets, location services, platform-owned).</li>
+                    <li>Partnered with engineering leads to translate these abstract concepts into concrete Shared Services (e.g., universal Search, Route Storage, and Offline Management).</li>
+                    <li>Visualized the end-state user value: proving how a unified backend could allow a user to plan a route in Gaia, see live reports from Trailforks, and track it on an Apple Watch—all pulling from a single source of truth.</li>
+                </ul>
+
+                <div class="case-study-images">
+                    <img src="../imgs/outside-maps/anatomy.png" alt="Hero" loading="lazy" />
+                    <img src="../imgs/outside-maps/vision.png" alt="Hero" loading="lazy" />
+                </div>
+
+
+                <h3>Execution</h3>
+
+                <p>Delivered the foundational Platform Architecture and Team Charter. By framing infrastructure as a design problem, I successfully shifted the executive conversation from "pixel tweaking" to "platform funding."</p>
+
+                <h3>Outcome</h3>
+
+                <p>The "Map Anatomy" framework served as the catalyst for major organizational and product shifts:</p>
+                <ul class="bullets">
+                    <li>Secured Net-New Headcount: The clarity of the framework provided the exact business case required for leadership to fund and hire a dedicated Maps Platform Engineering team.</li>
+                    <li>Initiated Enterprise Data Merger: Exposed the critical need for a "Canonical Trails Database," kicking off the massive, multi-year engineering effort to merge the disparate Gaia and Trailforks datasets.</li>
+                    <li>Unblocked Product Innovation: The shared primitives directly enabled the launch of Gaia's new "Adventure Modes," allowing the interface to dynamically reconfigure itself based on the centralized data architecture.</li>
+
+            </div>
+        </div>
+    
+
+<footer>
+            <a href="onboarding.html">← Back: Reframing Cross-Product Onboarding</a>
+            <a href="capture.html">Next: Automating VR Room Capture →</a>
+        </footer>
+
+        
+
+    </main>
+
+
+</body>
+</html>

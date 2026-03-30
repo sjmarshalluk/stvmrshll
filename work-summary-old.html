@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stephen Marshall — Product Design</title>
+  <style>
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-secondary: #666;
+      --color-bg: #fff;
+      --color-border: #e0e0e0;
+      --color-accent: #1a1a1a;
+      --color-highlight: #f5f5f5;
+      --nav-width: 270px;
+      --content-max: 900px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Desktop Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--nav-width) 1fr;
+      min-height: 100vh;
+    }
+
+    /* Side Navigation */
+    .side-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--nav-width);
+      height: 100vh;
+      padding: 3rem 0 3rem 3.5rem;
+      background: var(--color-bg);
+      overflow-y: auto;
+    }
+
+    .side-nav__title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .side-nav__list {
+      list-style: none;
+    }
+
+    .side-nav__item {
+      margin-bottom: 0.75rem;
+    }
+
+    .side-nav__link {
+      display: block;
+      padding: 0.5rem 0;
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      line-height: 1.4;
+      transition: color 0.15s ease;
+      position: relative;
+      padding: 0.5rem 0.75rem;
+      background-color: var(--color-bg);
+      border-radius: 10px;
+    }
+
+    .side-nav__link:hover {
+      color: var(--color-text);
+    }
+
+    .side-nav__link.is-active {
+      color: var(--color-text);
+      font-weight: 600;
+      background-color: var(--color-highlight);
+    }
+/*
+    .side-nav__link.is-active::before {
+      content: "";
+      position: absolute;
+      left: -1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 1rem;
+      background: var(--color-accent);
+    }
+*/
+    /* Mobile Navigation */
+    .mobile-nav {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem;
+    }
+
+    .mobile-nav__label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .mobile-nav__select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      font-family: var(--font-sans);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      background: var(--color-bg);
+      color: var(--color-text);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+    }
+
+    /* Main Content */
+    .main-content {
+      grid-column: 2;
+      padding: 3rem 4rem;
+      max-width: calc(var(--content-max) + 8rem);
+      margin: 0 auto;
+    }
+
+    /* Section */
+    .section {
+      padding: 8rem 0;
+    }
+
+    .section:first-of-type {
+      padding-top: 0;
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    /* Panel A: Section Intro */
+    .section__intro {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+    }
+
+    .section__headline {
+      font-size: 1.75rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section__subline {
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    /* Panel B: Skills */
+    .section__skills {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+    }
+
+    .panel-label {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem 2rem;
+    }
+
+    .skills-list {
+      list-style: none;
+    }
+
+    .skills-list li {
+      font-size: 0.9375rem;
+      padding: 0.375rem 0;
+      color: var(--color-text);
+      position: relative;
+      padding-left: 0.875rem;
+    }
+
+    .skills-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 4px;
+      height: 4px;
+      background: var(--color-text-secondary);
+      border-radius: 50%;
+    }
+
+    /* Panel C: Work */
+    .section__work {
+      /* No bottom border needed */
+    }
+
+    /* Work Grid - flexbox for horizontal accordion */
+    .work-grid {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    /* Project Tile */
+    .project-tile {
+      flex: 1;
+      min-width: 0;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      margin: 0;
+    }
+
+    .project-tile:hover {
+      opacity: 0.85;
+    }
+
+    .project-tile.is-expanded:hover {
+      opacity: 1;
+    }
+
+    /* When a tile is expanded, it grows and others shrink */
+    .work-grid.has-expanded .project-tile {
+      flex: 0.5;
+    }
+
+    .work-grid.has-expanded .project-tile.is-expanded {
+      flex: 3;
+    }
+
+    .work-grid.has-expanded .project-tile:not(.is-expanded) {
+      opacity: 0.7;
+    }
+
+    .work-grid.has-expanded .project-tile:not(.is-expanded) .project-tile__content {
+      opacity: 0;
+    }
+
+    .work-grid.has-expanded .project-tile:not(.is-expanded):hover {
+      opacity: 0.9;
+    }
+
+    /* Expanded tile layout - horizontal with visual on left, content on right */
+    .project-tile.is-expanded {
+      
+      grid-template-columns: 280px 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 0 1.5rem;
+      border-radius: 10px;
+      margin: -30px;
+      z-index: 10;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.2);
+    }
+  .project-tile.is-expanded:focus,
+  .project-tile:focus {
+    outline: none;
+  }
+
+    .project-tile.is-expanded .project-tile__visual {
+      grid-row: 1 / -1;
+      height: 430px;
+      padding: 20px;
+    }
+
+    .project-tile.is-expanded .project-tile__content {
+      align-self: start;
+      padding: 1rem;
+    }
+
+    .project-tile.is-expanded .project-tile__name {
+      font-size: 1rem;
+    }
+
+    .project-tile.is-expanded .project-tile__details {
+      grid-column: 2;
+      align-self: start;
+      padding: 1rem;
+    }
+
+    /* Expanded details */
+    .project-tile__details {
+      display: none;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .project-tile.is-expanded .project-tile__details {
+      display: block;
+    }
+
+    .project-tile__details ul {
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+
+    .project-tile__details li {
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+      padding: 0.25rem 0;
+      padding-left: 0.875rem;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .project-tile__details li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.625rem;
+      width: 4px;
+      height: 4px;
+      background: var(--color-text-secondary);
+      border-radius: 50%;
+    }
+
+    .project-tile__close {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: auto;
+    }
+
+    .project-tile__close:hover {
+      color: var(--color-text);
+    }
+
+    /* Non-expanded tiles hide their details */
+    .project-tile:not(.is-expanded) .project-tile__details {
+      display: none;
+    }
+
+    .project-tile__visual {
+      /*aspect-ratio: 16 / 9;*/
+      height: 400px;
+      background: #f5f5f5;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-tile__visual svg {
+      width: 60%;
+      height: 60%;
+      opacity: 0.15;
+    }
+
+    .project-tile__visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .project-tile__content {
+      padding: 1rem 0.25rem;
+    }
+
+    .project-tile__name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-tile__caption {
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+      display: none;
+    }
+
+    /* Slideshow Navigation - appears on expanded tile visual */
+    .slideshow-nav {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.95);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .project-tile.is-expanded .slideshow-nav {
+      display: flex;
+    }
+
+    .slideshow-nav__btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .slideshow-nav__btn:hover {
+      border-color: var(--color-text);
+      background: var(--color-highlight);
+    }
+
+    .slideshow-nav__btn svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .slideshow-nav__dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .slideshow-nav__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .slideshow-nav__dot.is-active {
+      background: var(--color-text);
+    }
+
+    .slideshow-nav__counter {
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      min-width: 3em;
+      text-align: center;
+    }
+
+    /* Hide slideshow nav when only 1 slide */
+    .slideshow-nav.single-slide {
+      display: none !important;
+    }
+
+    /* Hide old slideshow container in details */
+    .project-tile__details .slideshow {
+      display: none;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 900px) {
+      .layout {
+        display: block;
+      }
+
+      .side-nav {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: block;
+      }
+
+      .main-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+
+      .section__headline {
+        font-size: 1.5rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .work-grid {
+        flex-direction: column;
+      }
+
+      .project-tile.is-expanded {
+        grid-template-columns: 1fr;
+      }
+
+      .project-tile.is-expanded .project-tile__visual {
+        grid-row: auto;
+        height: 200px;
+        margin-bottom: 1rem;
+      }
+
+      .project-tile.is-expanded .project-tile__details {
+        grid-column: 1;
+      }
+    }
+
+
+
+
+
+    /* Placeholder Visuals */
+    .visual-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-placeholder svg {
+      width: 50%;
+      height: auto;
+      opacity: 0.12;
+    }
+
+    /* ===========================================
+       PROJECT DECK - Full-width slideshow format
+       =========================================== */
+    .project-decks {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .project-deck {
+      width: 100%;
+      background: var(--color-highlight);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-deck__slide {
+      display: none;
+      width: 100%;
+    }
+
+    .project-deck__slide.is-active {
+      display: block;
+    }
+
+    .project-deck__image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .project-deck__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-deck__content {
+      padding: 1.5rem 2rem;
+      min-height: 100px;
+    }
+
+    .project-deck__text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-text);
+      max-width: 700px;
+    }
+
+    .project-deck__slide-number {
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      display: none;
+    }
+
+    .project-deck__title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--color-text);
+      margin: 0;
+    }
+
+    /* Deck Navigation */
+    .project-deck__nav {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255,255,255,0.95);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    .project-deck__nav-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .project-deck__nav-btn:hover {
+      border-color: var(--color-text);
+      background: var(--color-highlight);
+    }
+
+    .project-deck__nav-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .project-deck__nav-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .project-deck__nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .project-deck__nav-dot.is-active {
+      background: var(--color-text);
+    }
+
+    .project-deck__nav-counter {
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+      min-width: 3em;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Mobile adjustments for decks */
+    @media (max-width: 900px) {
+      .project-deck__content {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .project-deck__title {
+        font-size: 1.125rem;
+      }
+
+      .project-deck__nav {
+        right: 1rem;
+        bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" aria-label="Section navigation">
+    <div class="mobile-nav__label">Sections</div>
+    <select class="mobile-nav__select" id="mobile-nav-select">
+      <option value="#discovery">Product Discovery & 0→1 Definition</option>
+      <option value="#systems">Systems & Platform Design</option>
+      <option value="#strategy">Product Strategy & Direction-Setting</option>
+      <option value="#decisions">Decision Systems & Team Alignment</option>
+      <option value="#execution">High-Quality Product Execution</option>
+      <option value="#geospatial">Maps, Spatial Data & Geospatial Design</option>
+    </select>
+  </nav>
+
+  <div class="layout">
+    <!-- Side Navigation -->
+    <nav class="side-nav" aria-label="Section navigation">
+
+      <div class="side-nav__title">Expertise</div>
+      <ul class="side-nav__list">
+        <li class="side-nav__item">
+          <a href="#strategy" class="side-nav__link">Product Strategy & Direction-Setting</a>
+        </li>
+        <li class="side-nav__item">
+          <a href="#alignment" class="side-nav__link">Decision Systems & Team Alignment</a>
+        </li>
+        <li class="side-nav__item">
+          <a href="#discovery" class="side-nav__link is-active">Product Discovery & 0→1 Definition</a>
+        </li>
+        <li class="side-nav__item">
+          <a href="#systems" class="side-nav__link">Systems & Platform Design</a>
+        </li>
+        <li class="side-nav__item">
+          <a href="#execution" class="side-nav__link">High-Quality Product Execution</a>
+        </li>
+        <li class="side-nav__item">
+          <a href="#geospatial" class="side-nav__link">Maps, Spatial Data & Geospatial Design</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+
+      <!-- Section 3: Direction, Strategy & Alignment -->
+      <section class="section" id="strategy">
+        <div class="panel-label">Product Strategy & Direction-Setting</div>
+        <!-- Panel A: Intro -->
+        <div class="section__intro">
+          <h2 class="section__headline">Setting direction by designing how decisions get made.</h2>
+          <p class="section__subline">I help teams navigate ambiguity by aligning people, context, and constraints into clear strategic direction—and the decision systems to sustain it.</p>
+        </div>
+
+        <!-- Panel B: Skills -->
+        <div class="section__skills">
+          <div class="panel-label">Core skills</div>
+          <div class="skills-grid">
+            <ul class="skills-list">
+              <li>Product vision & strategic framing</li>
+              <li>Opportunity definition & prioritization</li>
+              <li>Decision flow & ownership modeling</li>
+              <li>Strategic documentation & shared artifacts</li>
+              <li>Mental model design</li>
+              <li>Cross-functional alignment & facilitation</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Panel C: Work -->
+        <div class="section__work">
+          <div class="panel-label">Project Snippets</div>
+          <div class="work-grid" style="display: none;">
+            <article class="project-tile" id="strategy-opportunity" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/bysm/landscape.png" alt="BYSM Landscape">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Narrowing in on a core and definable opportunity in an undefined and systemic problem space</h3>
+                <p class="project-tile__caption">Framed the opportunity space, constraints, and strategic bets before execution began.</p>
+              </div>
+              <div class="project-tile__details" style="display: none;">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Unclear strategic positioning in a crowded market with limited resources</li>
+                  <li>Synthesized market research, user insights, and business constraints into a clear strategic framework</li>
+                  <li>Enabled confident decision-making on where to compete and what to deprioritize</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="strategy-analytics" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/onboarding/analytics.png" alt="Maps Vision">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Exploring quantitative insights to determine the importance of undertaking a new initiative</h3>
+                <p class="project-tile__caption">Designed shared decision frameworks across multiple teams and products.</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Many possible directions with high uncertainty and organizational pressure to commit</li>
+                  <li>Structured exploration to narrow options and articulate trade-offs clearly</li>
+                  <li>Gave leadership a defensible basis for strategic choices</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="strategy-vision" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/outside/vision.png" alt="Maps Vision">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Establishing an ecosystem vision to inform product roadmaps and long-term engineering efforts</h3>
+                <p class="project-tile__caption">Direction before features</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Teams eager to build but lacking clarity on what problems to prioritize</li>
+                  <li>Facilitated strategy sessions to establish direction, success criteria, and sequencing</li>
+                  <li>Aligned teams on a shared roadmap before committing engineering resources</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+
+
+          </div>
+
+          <!-- Project Decks - Full-width slideshow format -->
+          <div class="project-decks">
+            <div class="panel-label" style="margin-top: 2rem;">Project Deep Dives</div>
+
+            <!-- Deck 1 -->
+            <div class="project-deck" id="deck-strategy-1">
+              <div class="project-deck__slide is-active">
+                <div class="project-deck__image">
+                  <img src="images/bysm/landscape.png" alt="Project Cover">
+                </div>
+                <div class="project-deck__content">
+                  <div class="project-deck__slide-number">Slide 1 of 4</div>
+                  <h3 class="project-deck__title">Defining Strategic Direction for a New Market</h3>
+                </div>
+              </div>
+              <div class="project-deck__slide">
+                <div class="project-deck__image">
+                  <img src="images/project/2.png" alt="Slide 2">
+                </div>
+                <div class="project-deck__content">
+                  <div class="project-deck__slide-number">Slide 2 of 4</div>
+                  <p class="project-deck__text">The challenge: Multiple stakeholders with competing priorities and no shared understanding of the opportunity space. We needed to align on what success looked like before committing resources.</p>
+                </div>
+              </div>
+              <div class="project-deck__slide">
+                <div class="project-deck__image">
+                  <img src="images/project/3.png" alt="Slide 3">
+                </div>
+                <div class="project-deck__content">
+                  <div class="project-deck__slide-number">Slide 3 of 4</div>
+                  <p class="project-deck__text">I facilitated a series of workshops to map the competitive landscape, identify unmet user needs, and articulate the strategic trade-offs. This created a shared artifact that teams could reference throughout execution.</p>
+                </div>
+              </div>
+              <div class="project-deck__slide">
+                <div class="project-deck__image">
+                  <img src="images/outside/vision.png" alt="Slide 4">
+                </div>
+                <div class="project-deck__content">
+                  <div class="project-deck__slide-number">Slide 4 of 4</div>
+                  <p class="project-deck__text">The outcome: Leadership had a defensible basis for strategic choices, and teams were aligned on priorities. This reduced churn and accelerated decision-making throughout the project lifecycle.</p>
+                </div>
+              </div>
+              <div class="project-deck__nav">
+                <button class="project-deck__nav-btn project-deck__nav-btn--prev" aria-label="Previous slide">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <div class="project-deck__nav-dots"></div>
+                <button class="project-deck__nav-btn project-deck__nav-btn--next" aria-label="Next slide">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <span class="project-deck__nav-counter">1 / 4</span>
+              </div>
+            </div>
+
+            <!-- Deck 2 -->
+            <div class="project-deck" id="deck-strategy-2">
+              <div class="project-deck__slide is-active">
+                <div class="project-deck__image">
+                  <img src="images/onboarding/analytics.png" alt="Project Cover">
+                </div>
+                <div class="project-deck__content">
+                  <div class="project-deck__slide-number">Slide 1 of 3</div>
+                  <h3 class="project-deck__title">Building Decision Frameworks Under Uncertainty</h3>
+                </div>
+              </div>
+              <div class="project-deck__slide">
+                <div class="project-deck__image">
+                  <img src="images/travel/deliverables-future.png" alt="Slide 2">
+                </div>
+                <div class="project-deck__content">
+                  <div class="project-deck__slide-number">Slide 2 of 3</div>
+                  <p class="project-deck__text">When faced with high uncertainty and pressure to commit, teams often rush to solutions. I helped establish a structured approach to narrow options while preserving flexibility.</p>
+                </div>
+              </div>
+              <div class="project-deck__slide">
+                <div class="project-deck__image">
+                  <img src="images/outside/map-thumb.png" alt="Slide 3">
+                </div>
+                <div class="project-deck__content">
+                  <div class="project-deck__slide-number">Slide 3 of 3</div>
+                  <p class="project-deck__text">The framework we developed became a reusable tool across the organization, enabling faster and more confident decision-making on future initiatives.</p>
+                </div>
+              </div>
+              <div class="project-deck__nav">
+                <button class="project-deck__nav-btn project-deck__nav-btn--prev" aria-label="Previous slide">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <div class="project-deck__nav-dots"></div>
+                <button class="project-deck__nav-btn project-deck__nav-btn--next" aria-label="Next slide">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <span class="project-deck__nav-counter">1 / 3</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Section: Decision Systems & Team Alignment -->
+      <section class="section" id="alignment">
+        <div class="panel-label">Decision Systems & Team Alignment</div>
+        <!-- Panel A: Intro -->
+        <div class="section__intro">
+          <h2 class="section__headline">xxx</h2>
+          <p class="section__subline">xxx</p>
+        </div>
+
+        <!-- Panel B: Skills -->
+        <div class="section__skills">
+          <div class="panel-label">Core skills</div>
+          <div class="skills-grid">
+            <ul class="skills-list">
+              <li>Problem framing & hypothesis design</li>
+              <li>Discovery workshops & facilitation</li>
+              <li>Rapid prototyping & concept validation</li>
+            </ul>
+            <ul class="skills-list">
+              <li>Qualitative research & synthesis</li>
+              <li>Early product shaping under uncertainty</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Panel C: Work -->
+        <div class="section__work">
+          <div class="panel-label">Project Snippets</div>
+          <div class="work-grid">
+            <article class="project-tile" id="alignment-tools" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/other/mesh-designer.png" alt="Maps Vision">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Building custom tools to enable collaboration and XXX</h3>
+                <p class="project-tile__caption">Direction before features</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Teams eager to build but lacking clarity on what problems to prioritize</li>
+                  <li>Facilitated strategy sessions to establish direction, success criteria, and sequencing</li>
+                  <li>Aligned teams on a shared roadmap before committing engineering resources</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="alignment-mapillary" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/mapillary/xx.png" alt="Mapillary Data">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">xxx</h3>
+                <p class="project-tile__caption">Took a loose idea to validated MVP</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Founders had conviction but lacked clarity on customer, workflow, and core value</li>
+                  <li>Ran rapid prototyping cycles to stress-test assumptions and converge on viable first release</li>
+                  <li>Delivered a testable MVP that enabled early traction and learning</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="alignment-capture" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/capture/xxx.png" alt="Meta 0→1 Explorations">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">xxx</h3>
+                <p class="project-tile__caption">Early MR concepts under uncertainty</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Emerging technology with unclear use cases and no established design patterns</li>
+                  <li>Explored concept directions, ran design sprints, and synthesized learnings for leadership</li>
+                  <li>Contributed to strategic clarity on which bets to pursue and why</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Section: Product Discovery & 0→1 Definition -->
+      <section class="section" id="discovery">
+        <div class="panel-label">Product Discovery & 0→1 Definition</div>
+        <!-- Panel A: Intro -->
+        <div class="section__intro">
+          <h2 class="section__headline">Turning ambiguity into clear product direction.</h2>
+          <p class="section__subline">Helping teams move from loose ideas and unknowns to well-framed problems, tested concepts, and confident early bets.</p>
+        </div>
+
+        <!-- Panel B: Skills -->
+        <div class="section__skills">
+          <div class="panel-label">Core skills</div>
+          <div class="skills-grid">
+            <ul class="skills-list">
+              <li>Problem framing & hypothesis design</li>
+              <li>Discovery workshops & facilitation</li>
+              <li>Rapid prototyping & concept validation</li>
+            </ul>
+            <ul class="skills-list">
+              <li>Qualitative research & synthesis</li>
+              <li>Early product shaping under uncertainty</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Panel C: Work -->
+        <div class="section__work">
+          <div class="panel-label">Project Snippets</div>
+          <div class="work-grid">
+            <article class="project-tile" id="discovery-workshops" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/travel/deliverables-future.png" alt="Outside Travel">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Running cross-functional workshops to help Outside identify and align on new business opportunities</h3>
+                <p class="project-tile__caption">Defined opportunity space and early direction</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Ambiguous market opportunity with no existing product or clear user target</li>
+                  <li>Led discovery to map competitive landscape, identify unmet needs, and define initial product boundaries</li>
+                  <li>Enabled leadership to commit resources with clarity on what success would look like</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="discovery-prototyping" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/mapillary/data.png" alt="Mapillary Data">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Rapid prototyping with real data to understand opportunities and identify viable solutions</h3>
+                <p class="project-tile__caption">Took a loose idea to validated MVP</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Founders had conviction but lacked clarity on customer, workflow, and core value</li>
+                  <li>Ran rapid prototyping cycles to stress-test assumptions and converge on viable first release</li>
+                  <li>Delivered a testable MVP that enabled early traction and learning</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="discovery-meta" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/capture/complete2.png" alt="Meta 0→1 Explorations">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Meta (0→1 Explorations)</h3>
+                <p class="project-tile__caption">Early MR concepts under uncertainty</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Emerging technology with unclear use cases and no established design patterns</li>
+                  <li>Explored concept directions, ran design sprints, and synthesized learnings for leadership</li>
+                  <li>Contributed to strategic clarity on which bets to pursue and why</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Systems & Platform Design -->
+      <section class="section" id="systems">
+        <div class="panel-label">Systems & Platform Design</div>
+        <!-- Panel A: Intro -->
+        <div class="section__intro">
+          <h2 class="section__headline">Designing products that work as coherent systems.</h2>
+          <p class="section__subline">Specializing in cross-product experiences where success depends on shared mental models and long-term evolution.</p>
+        </div>
+
+        <!-- Panel B: Skills -->
+        <div class="section__skills">
+          <div class="panel-label">Core skills</div>
+          <div class="skills-grid">
+            <ul class="skills-list">
+              <li>Systems modeling & abstraction</li>
+              <li>Cross-product experience design</li>
+              <li>Platform mental models</li>
+            </ul>
+            <ul class="skills-list">
+              <li>Designing for scale and change</li>
+              <li>Navigating organizational complexity</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Panel C: Work -->
+        <div class="section__work">
+          <div class="panel-label">Project Snippets</div>
+          <div class="work-grid">
+            <article class="project-tile" id="systems-onboarding" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/onboarding/core-ux.png" alt="Outside Onboarding">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Developing a canonical onboarding experience for a product ecosystem while retaining individuality</h3>
+                <p class="project-tile__caption">Unified onboarding across products</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Multiple products with fragmented onboarding creating user confusion and churn</li>
+                  <li>Designed a shared onboarding framework that balanced product-specific needs with cross-portfolio coherence</li>
+                  <li>Reduced time-to-value and improved retention across key entry points</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="systems-maps" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/outside/map-thumb.png" alt="Outside Maps Platform">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Establishing a shared mental model for how maps are constructed and utilized across products</h3>
+                <p class="project-tile__caption">Shared mapping capabilities</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Mapping features duplicated across apps with inconsistent behavior and high maintenance cost</li>
+                  <li>Defined platform abstractions that enabled teams to build on shared capabilities while preserving flexibility</li>
+                  <li>Reduced duplication and accelerated feature delivery across products</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="systems-primitives" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                xxx
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">XXX</h3>
+                <p class="project-tile__caption">Platform primitives and alignment</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Teams working in silos, building redundant solutions and creating inconsistent user experiences</li>
+                  <li>Identified shared primitives and facilitated alignment on common patterns</li>
+                  <li>Improved organizational efficiency and user experience coherence</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Section 5: High-Quality Product Execution -->
+      <section class="section" id="execution">
+        <div class="panel-label">High-Quality Product Execution</div>
+        <!-- Panel A: Intro -->
+        <div class="section__intro">
+          <h2 class="section__headline">Shipping thoughtful products under real-world constraints.</h2>
+          <p class="section__subline">Delivering high-quality UX in regulated, data-dense, and technically complex environments.</p>
+        </div>
+
+        <!-- Panel B: Skills -->
+        <div class="section__skills">
+          <div class="panel-label">Core skills</div>
+          <div class="skills-grid">
+            <ul class="skills-list">
+              <li>Interaction design & UX architecture</li>
+              <li>Design systems application</li>
+              <li>Accessibility & inclusive design</li>
+            </ul>
+            <ul class="skills-list">
+              <li>Engineering collaboration</li>
+              <li>Quality at scale</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Panel C: Work -->
+        <div class="section__work">
+          <div class="panel-label">Project Snippets</div>
+          <div class="work-grid">
+            <article class="project-tile" id="execution-uxui" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/other/macmillan.png" alt="Macmillan">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">UX/UI design for a range of industries</h3>
+                <p class="project-tile__caption">Patient-facing regulated systems</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>High-stakes healthcare context with strict compliance, accessibility, and reliability requirements</li>
+                  <li>Designed patient-facing interfaces that met regulatory standards while remaining usable and humane</li>
+                  <li>Shipped production systems used by millions with zero critical failures</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="execution-nonui" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/capture/complete2.png" alt="Capture">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Design for non-UI based experiences</h3>
+                <p class="project-tile__caption">Data-dense mapping UX</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Complex mapping application with dense data layers and offline-first requirements</li>
+                  <li>Improved information hierarchy and interaction patterns for expert and novice users</li>
+                  <li>Enhanced usability without sacrificing power-user capabilities</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="execution-ai" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/other/mesh-designer.png" alt="Mesh Designer">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Exploring opportunities to utilize AI to optimize processes and design quality</h3>
+                <p class="project-tile__caption">Shipped production work</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Enterprise-scale products with complex stakeholder dynamics and technical constraints</li>
+                  <li>Navigated cross-functional dependencies to deliver polished, production-ready experiences</li>
+                  <li>Maintained design quality while meeting aggressive timelines</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Maps, Spatial Data & Geospatial Design -->
+      <section class="section" id="geospatial">
+        <div class="panel-label">Maps, Spatial Data & Geospatial Design</div>
+        <!-- Panel A: Intro -->
+        <div class="section__intro">
+          <h2 class="section__headline">Designing with geography, space, and location at the core.</h2>
+          <p class="section__subline">Maps are systems, not just visuals. This work makes spatial data legible and useful.</p>
+        </div>
+
+        <!-- Panel B: Skills -->
+        <div class="section__skills">
+          <div class="panel-label">Core skills</div>
+          <div class="skills-grid">
+            <ul class="skills-list">
+              <li>Geospatial data abstraction</li>
+              <li>Cartographic design</li>
+              <li>Spatial UX patterns</li>
+              <li>Tooling (QGIS, Mapbox, etc.)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Panel C: Work -->
+        <div class="section__work">
+          <div class="panel-label">Project Snippets</div>
+          <div class="work-grid">
+            <article class="project-tile" id="geospatial-mapillary" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/mapillary/hero.png" alt="Outside Onboarding">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Mapillary</h3>
+                <p class="project-tile__caption">Spatial imagery tools</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Street-level imagery platform requiring intuitive navigation of massive spatial datasets</li>
+                  <li>Designed tools for capturing, browsing, and editing geospatial imagery at scale</li>
+                  <li>Improved data quality workflows and contributor experience</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="geospatial-wilderland" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <div class="visual-placeholder">
+                  <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 50 L30 30 L50 40 L70 20 L90 35" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M10 55 Q50 45 90 55" stroke="currentColor" stroke-width="1" fill="none"/>
+                    <circle cx="30" cy="30" r="4" stroke="currentColor" stroke-width="1" fill="none"/>
+                    <circle cx="70" cy="20" r="4" stroke="currentColor" stroke-width="1" fill="none"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Wilderland</h3>
+                <p class="project-tile__caption">Independent cartographic work</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Personal project exploring custom cartographic styles and data visualization</li>
+                  <li>Developed end-to-end mapping workflows from data processing to final rendering</li>
+                  <li>Demonstrates deep technical fluency with geospatial tools and design sensibility</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+
+            <article class="project-tile" id="geospatial-meta" tabindex="0" role="button" aria-expanded="false">
+              <div class="project-tile__visual">
+                <img src="images/dora/thumb.png" alt="Dora">
+              </div>
+              <div class="project-tile__content">
+                <h3 class="project-tile__name">Meta Data Collection</h3>
+                <p class="project-tile__caption">XXXX</p>
+              </div>
+              <div class="project-tile__details">
+                <div class="slideshow"></div>
+                <ul>
+                  <li>Multiple outdoor products needing consistent, high-quality mapping capabilities</li>
+                  <li>Designed shared map components and interaction patterns across the product family</li>
+                  <li>Enabled faster feature development while maintaining cartographic quality</li>
+                </ul>
+                <span class="project-tile__close">Collapse</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // ===========================================
+    // PROJECT DATA - Edit slide content here
+    // ===========================================
+    const projectData = {
+      // Strategy Section
+      'strategy-opportunity': {
+        slides: [
+          { image: 'images/bysm/landscape.png', caption: 'Narrowing in on a core and definable opportunity in an undefined and systemic problem space' },
+          { image: 'images/project/2.png', caption: 'Slide 2 caption' },
+          { image: 'images/project/3.png', caption: 'Slide 3 caption' }
+        ]
+      },
+      'strategy-analytics': {
+        slides: [
+          { image: 'images/onboarding/analytics.png', caption: 'Exploring quantitative insights to determine the importance of undertaking a new initiative' }
+        ]
+      },
+      'strategy-vision': {
+        slides: [
+          { image: 'images/outside/vision.png', caption: 'Establishing an ecosystem vision to inform product roadmaps and long-term engineering efforts' }
+        ]
+      },
+
+      // Alignment Section
+      'alignment-tools': {
+        slides: [
+          { image: 'images/other/mesh-designer.png', caption: 'Building custom tools to enable collaboration and XXX' }
+        ]
+      },
+      'alignment-mapillary': {
+        slides: [
+          { image: 'images/mapillary/xx.png', caption: 'xxx' },
+          { image: 'images/projects/stall.png', caption: 'Slide 2 caption' },
+          { image: 'images/projects/stall-2.png', caption: 'Slide 3 caption' }
+        ]
+      },
+      'alignment-capture': {
+        slides: [
+          { image: 'images/capture/xxx.png', caption: 'xxx' },
+          { image: 'images/capture/complete2.png', caption: 'Slide 2 caption' },
+          { image: 'images/capture/slide-2.png', caption: 'Slide 3 caption' },
+          { image: 'images/capture/slide-3.png', caption: 'Slide 4 caption' }
+        ]
+      },
+
+      // Discovery Section
+      'discovery-workshops': {
+        slides: [
+          { image: 'images/travel/deliverables-future.png', caption: 'Running cross-functional workshops to help Outside identify and align on new business opportunities' },
+          { image: 'images/travel/slide-2.png', caption: 'Slide 2 caption' },
+          { image: 'images/travel/slide-3.png', caption: 'Slide 3 caption' }
+        ]
+      },
+      'discovery-prototyping': {
+        slides: [
+          { image: 'images/mapillary/data.png', caption: 'Rapid prototyping with real data to understand opportunities and identify viable solutions' },
+          { image: 'images/projects/stall.png', caption: 'Slide 2 caption' },
+          { image: 'images/projects/stall-2.png', caption: 'Slide 3 caption' }
+        ]
+      },
+      'discovery-meta': {
+        slides: [
+          { image: 'images/capture/complete2.png', caption: 'Meta (0→1 Explorations)' },
+          { image: 'images/capture/slide-2.png', caption: 'Slide 2 caption' },
+          { image: 'images/capture/slide-3.png', caption: 'Slide 3 caption' }
+        ]
+      },
+
+      // Systems Section
+      'systems-onboarding': {
+        slides: [
+          { image: 'images/onboarding/core-ux.png', caption: 'Developing a canonical onboarding experience for a product ecosystem while retaining individuality' },
+          { image: 'images/onboarding/slide-2.png', caption: 'Slide 2 caption' }
+        ]
+      },
+      'systems-maps': {
+        slides: [
+          { image: 'images/outside/map-thumb.png', caption: 'Establishing a shared mental model for how maps are constructed and utilized across products' }
+        ]
+      },
+      'systems-primitives': {
+        slides: [
+          { image: '', caption: 'XXX' }
+        ]
+      },
+
+      // Execution Section
+      'execution-uxui': {
+        slides: [
+          { image: 'images/other/macmillan.png', caption: 'UX/UI design for a range of industries' }
+        ]
+      },
+      'execution-nonui': {
+        slides: [
+          { image: 'images/capture/complete2.png', caption: 'Design for non-UI based experiences' }
+        ]
+      },
+      'execution-ai': {
+        slides: [
+          { image: 'images/other/mesh-designer.png', caption: 'Exploring opportunities to utilize AI to optimize processes and design quality' }
+        ]
+      },
+
+      // Geospatial Section
+      'geospatial-mapillary': {
+        slides: [
+          { image: 'images/mapillary/hero.png', caption: 'Mapillary' }
+        ]
+      },
+      'geospatial-wilderland': {
+        slides: [
+          { image: '', caption: 'Wilderland' }
+        ]
+      },
+      'geospatial-meta': {
+        slides: [
+          { image: 'images/dora/thumb.png', caption: 'Meta Data Collection' }
+        ]
+      }
+    };
+
+    // Mobile navigation
+    const mobileSelect = document.getElementById('mobile-nav-select');
+    mobileSelect.addEventListener('change', (e) => {
+      const target = document.querySelector(e.target.value);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    // Card slideshow functionality - image and caption change together
+    function initCardSlideshow(tile) {
+      const data = projectData[tile.id];
+      if (!data || !data.slides || data.slides.length === 0) return;
+
+      const images = data.slides.map(s => s.image).filter(img => img);
+      const captions = data.slides.map(s => s.caption);
+
+      if (images.length === 0) return;
+
+      const visual = tile.querySelector('.project-tile__visual');
+      const nameEl = tile.querySelector('.project-tile__name');
+
+      // Store original values
+      tile._originalImage = visual.querySelector('img')?.src || '';
+      tile._originalName = nameEl.textContent;
+      tile._currentIndex = 0;
+      tile._images = images;
+      tile._captions = captions;
+
+      // Create navigation if more than 1 slide
+      let nav = tile.querySelector('.slideshow-nav');
+      if (!nav) {
+        nav = document.createElement('div');
+        nav.className = 'slideshow-nav' + (images.length <= 1 ? ' single-slide' : '');
+        nav.innerHTML = `
+          <button class="slideshow-nav__btn slideshow-nav__btn--prev" aria-label="Previous">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="slideshow-nav__dots">
+            ${images.map((_, i) => `<span class="slideshow-nav__dot ${i === 0 ? 'is-active' : ''}" data-index="${i}"></span>`).join('')}
+          </div>
+          <button class="slideshow-nav__btn slideshow-nav__btn--next" aria-label="Next">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <span class="slideshow-nav__counter">1 / ${images.length}</span>
+        `;
+        visual.appendChild(nav);
+      }
+
+      // Update to first slide
+      updateSlide(tile, 0);
+
+      // Add event listeners
+      const prevBtn = nav.querySelector('.slideshow-nav__btn--prev');
+      const nextBtn = nav.querySelector('.slideshow-nav__btn--next');
+      const dots = nav.querySelectorAll('.slideshow-nav__dot');
+
+      prevBtn.onclick = (e) => {
+        e.stopPropagation();
+        const newIndex = (tile._currentIndex - 1 + images.length) % images.length;
+        updateSlide(tile, newIndex);
+      };
+
+      nextBtn.onclick = (e) => {
+        e.stopPropagation();
+        const newIndex = (tile._currentIndex + 1) % images.length;
+        updateSlide(tile, newIndex);
+      };
+
+      dots.forEach(dot => {
+        dot.onclick = (e) => {
+          e.stopPropagation();
+          updateSlide(tile, parseInt(dot.dataset.index));
+        };
+      });
+    }
+
+    function updateSlide(tile, index) {
+      const visual = tile.querySelector('.project-tile__visual');
+      const nameEl = tile.querySelector('.project-tile__name');
+      const img = visual.querySelector('img');
+      const nav = tile.querySelector('.slideshow-nav');
+
+      tile._currentIndex = index;
+
+      // Update image
+      if (img && tile._images[index]) {
+        img.src = tile._images[index];
+      }
+
+      // Update caption if available
+      if (tile._captions[index]) {
+        nameEl.textContent = tile._captions[index];
+      }
+
+      // Update nav dots and counter
+      if (nav) {
+        nav.querySelectorAll('.slideshow-nav__dot').forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === index);
+        });
+        const counter = nav.querySelector('.slideshow-nav__counter');
+        if (counter) {
+          counter.textContent = `${index + 1} / ${tile._images.length}`;
+        }
+      }
+    }
+
+    function destroyCardSlideshow(tile) {
+      // Restore original image and caption
+      const visual = tile.querySelector('.project-tile__visual');
+      const nameEl = tile.querySelector('.project-tile__name');
+      const img = visual.querySelector('img');
+
+      if (tile._originalImage && img) {
+        img.src = tile._originalImage;
+      }
+      if (tile._originalName) {
+        nameEl.textContent = tile._originalName;
+      }
+
+      // Remove navigation
+      const nav = tile.querySelector('.slideshow-nav');
+      if (nav) nav.remove();
+
+      // Clear stored data
+      delete tile._originalImage;
+      delete tile._originalName;
+      delete tile._currentIndex;
+      delete tile._images;
+      delete tile._captions;
+    }
+
+    // Project tile click handlers - horizontal accordion
+    document.querySelectorAll('.project-tile').forEach(tile => {
+      tile.addEventListener('click', (e) => {
+        // Don't toggle if clicking close button or slideshow controls
+        if (e.target.closest('.project-tile__close') ||
+            e.target.closest('.slideshow-nav__btn') ||
+            e.target.closest('.slideshow-nav__dot')) {
+          return;
+        }
+
+        const isExpanded = tile.classList.contains('is-expanded');
+        const grid = tile.closest('.work-grid');
+
+        // Close any currently expanded tile in this grid
+        grid.querySelectorAll('.project-tile.is-expanded').forEach(t => {
+          t.classList.remove('is-expanded');
+          t.setAttribute('aria-expanded', 'false');
+          destroyCardSlideshow(t);
+        });
+
+        if (isExpanded) {
+          // Just close - already handled above
+          grid.classList.remove('has-expanded');
+        } else {
+          // Expand this tile
+          tile.classList.add('is-expanded');
+          tile.setAttribute('aria-expanded', 'true');
+          grid.classList.add('has-expanded');
+
+          // Initialize card slideshow
+          initCardSlideshow(tile);
+        }
+      });
+
+      tile.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          tile.click();
+        }
+      });
+    });
+
+    // Close button handlers
+    document.querySelectorAll('.project-tile__close').forEach(closeBtn => {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tile = closeBtn.closest('.project-tile');
+        const grid = tile.closest('.work-grid');
+
+        tile.classList.remove('is-expanded');
+        tile.setAttribute('aria-expanded', 'false');
+        grid.classList.remove('has-expanded');
+        destroyCardSlideshow(tile);
+      });
+    });
+
+    // Active navigation on scroll
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.side-nav__link');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+
+          // Update side nav
+          navLinks.forEach(link => {
+            link.classList.remove('is-active');
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('is-active');
+            }
+          });
+
+          // Update mobile select
+          mobileSelect.value = `#${id}`;
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+
+    // ===========================================
+    // PROJECT DECK - Full-width slideshow
+    // ===========================================
+    function initProjectDecks() {
+      document.querySelectorAll('.project-deck').forEach(deck => {
+        const slides = deck.querySelectorAll('.project-deck__slide');
+        const nav = deck.querySelector('.project-deck__nav');
+        const dotsContainer = deck.querySelector('.project-deck__nav-dots');
+        const counter = deck.querySelector('.project-deck__nav-counter');
+        const prevBtn = deck.querySelector('.project-deck__nav-btn--prev');
+        const nextBtn = deck.querySelector('.project-deck__nav-btn--next');
+
+        if (slides.length === 0) return;
+
+        let currentIndex = 0;
+
+        // Create dots
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, i) => {
+          const dot = document.createElement('span');
+          dot.className = 'project-deck__nav-dot' + (i === 0 ? ' is-active' : '');
+          dot.dataset.index = i;
+          dot.addEventListener('click', () => goToSlide(i));
+          dotsContainer.appendChild(dot);
+        });
+
+        function goToSlide(index) {
+          slides[currentIndex].classList.remove('is-active');
+          currentIndex = index;
+          slides[currentIndex].classList.add('is-active');
+          updateNav();
+        }
+
+        function updateNav() {
+          // Update dots
+          dotsContainer.querySelectorAll('.project-deck__nav-dot').forEach((dot, i) => {
+            dot.classList.toggle('is-active', i === currentIndex);
+          });
+          // Update counter
+          counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+          const newIndex = (currentIndex - 1 + slides.length) % slides.length;
+          goToSlide(newIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+          const newIndex = (currentIndex + 1) % slides.length;
+          goToSlide(newIndex);
+        });
+
+        // Keyboard navigation
+        deck.setAttribute('tabindex', '0');
+        deck.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') {
+            const newIndex = (currentIndex - 1 + slides.length) % slides.length;
+            goToSlide(newIndex);
+          } else if (e.key === 'ArrowRight') {
+            const newIndex = (currentIndex + 1) % slides.length;
+            goToSlide(newIndex);
+          }
+        });
+      });
+    }
+
+    // Initialize decks on page load
+    initProjectDecks();
+  </script>
+</body>
+</html>

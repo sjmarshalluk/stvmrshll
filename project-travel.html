@@ -26,16 +26,29 @@
 </head>
 <body>
     <header>
+        <p class="headline"><a href="index.html">stvmrshll</a> <span class="tagline">Design + Product</span></p>
         
     </header>
 
     <main class="case-study-container">
 
         <div class="case-study-section">
+            <div class="section-nav">
+<a href="index.html" class="base-name">stvmrshll</a>/<a class="base-name" href="work.html">work</a><span class="path-text">/ai-travel</span>
+                
+
+                <ul>
+                    <li><a href="#">← Back</a></li>
+                    <li><a href="#">Overview</a></li>
+                    <li><a href="#">Near-term</a></li>
+                    <li><a href="#">Future</a></li>
+                    <li><a href="#">Workshops</a></li>
+                    <li><a href="#">Etc</a></li>
+                </ul>
+
+            </div>
             <div class="section-text">
-                <div class="case-study-nav">
-                    <a href="index.html" class="base-name">stvmrshll</a>/<a class="base-name" href="work.html">work</a><span class="path-text">/ai-travel</span>
-                </div>
+
 
                 <p class="intro">
                     Outside wanted to expand into the travel industry and explore the potential of how AI could improve the product as well as accelerate discovery and development.
@@ -217,52 +230,6 @@
 
     </main>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const sections = document.querySelectorAll('[data-figure]');
-        const figures = document.querySelectorAll('[data-figure-id]');
 
-        if (sections.length && figures.length) {
-            figures[0].classList.add('is-active');
-
-            const visibleSections = new Set();
-
-            const figureObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        visibleSections.add(entry.target);
-                    } else {
-                        visibleSections.delete(entry.target);
-                    }
-                });
-
-                let topmostSection = null;
-                let topmostPosition = Infinity;
-
-                visibleSections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top < topmostPosition) {
-                        topmostPosition = rect.top;
-                        topmostSection = section;
-                    }
-                });
-
-                if (topmostSection) {
-                    const figureId = topmostSection.getAttribute('data-figure');
-                    figures.forEach(fig => fig.classList.remove('is-active'));
-                    const targetFigure = document.querySelector(`[data-figure-id="${figureId}"]`);
-                    if (targetFigure) {
-                        targetFigure.classList.add('is-active');
-                    }
-                }
-            }, {
-                rootMargin: '-20% 0px -40% 0px',
-                threshold: 0
-            });
-
-            sections.forEach(section => figureObserver.observe(section));
-        }
-    });
-</script>
 </body>
 </html>
