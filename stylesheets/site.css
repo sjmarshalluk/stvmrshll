@@ -231,6 +231,7 @@ header {
     height: 60px;
     border-bottom: 1px solid var(--accent-line);
     padding: 0 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 header p {
@@ -849,14 +850,29 @@ font-family: var(--font-mono);
 .case-study-container {
     margin: 0 auto;
     padding: 0 1.5rem;
+    max-width: 2000px;
 }
 
 
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
-  gap: 20px; /* Spacing between columns */
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.col-offset {
+  padding-top: 120px;
+}
+
+@media (max-width: 640px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .col-offset {
+    padding-top: 0;
+  }
 }
 
 
@@ -933,6 +949,10 @@ ul.meta {
     right: -0.25rem;
     color: var(--text-tertiary);
     font-weight: 400;
+}
+
+.project ul.meta li:last-of-type::after {
+    content: none;
 }
 
 
@@ -1249,7 +1269,7 @@ ul.meta {
     }
 
     .case-study-container {
-        padding: 0 3rem;
+        padding: 0 1.5rem;
     }
 
     /* Terminal index responsive */
