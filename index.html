@@ -25,6 +25,7 @@
 </script>
 </head>
 <body>
+<div id="cursor"></div>
 
     <header>
         <p class="headline"><a href="index.html">stvmrshll</a> <span class="tagline">Design + Strategy</span></p>
@@ -59,7 +60,7 @@
           <div class="project-details">
             <h3>Accelerating Travel with AI</h3>
             <ul class="meta">
-                <li>Outside, 2025</li>
+                <li class="company">Outside, 2025</li>
                 <li>Discovery</li>
                 <li>AI</li>
                 <li>0→1</li>
@@ -80,7 +81,7 @@
           <div class="project-details">
             <h3>Unifying the Maps Platform</h3>
             <ul class="meta">
-                <li>Gaia / Outside, 2025</li>
+                <li class="company">Outside, 2024</li>
                 <li>Discovery</li>
                 <li>Platform</li>
                 <li>Strategy</li>
@@ -101,7 +102,7 @@
           <div class="project-details">
           <h3>Reframing Cross-Product Onboarding</h3>
             <ul class="meta">
-                <li>Outside, 2025</li>
+                <li class="company">Outside, 2025</li>
                 <li>Cross-Product</li>
                 <li>Strategy</li>
                 <li>UX/UI</li>
@@ -116,9 +117,10 @@
           <div class="project-details">
           <h3>Automating VR Room Capture</h3>
             <ul class="meta">
-                <li>Meta, 2022</li>
+                <li class="company">Meta, 2022</li>
                 <li>0→1</li>
                 <li>VR</li>
+                <li>Platform</li>
             </ul>
             </div>
         </a>
@@ -130,7 +132,7 @@
           <div class="project-details">
           <h3>Pioneering Location-Based AR</h3>
             <ul class="meta">
-                <li>Meta, 2022</li>
+                <li class="company">Meta, 2021</li>
                 <li>0→1</li>
                 <li>3D</li>
                 <li>UX/UI</li>
@@ -144,5 +146,35 @@
 </main>
 
 
+
+<script>
+  const cursor = document.getElementById('cursor');
+  let mouseX = 0, mouseY = 0;
+  let curX = 0, curY = 0;
+  let started = false;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!started) {
+      curX = mouseX;
+      curY = mouseY;
+      started = true;
+      cursor.style.opacity = '1';
+    }
+  });
+
+  document.querySelectorAll('a').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+  });
+
+  (function animate() {
+    curX += (mouseX - curX) * 0.32;
+    curY += (mouseY - curY) * 0.32;
+    cursor.style.transform = `translate(${curX}px, ${curY}px)`;
+    requestAnimationFrame(animate);
+  })();
+</script>
 </body>
 </html>

@@ -126,6 +126,35 @@
 
     </main>
 
+<div id="cursor"></div>
+<script>
+  const cursor = document.getElementById('cursor');
+  let mouseX = 0, mouseY = 0;
+  let curX = 0, curY = 0;
+  let started = false;
 
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!started) {
+      curX = mouseX;
+      curY = mouseY;
+      started = true;
+      cursor.style.opacity = '1';
+    }
+  });
+
+  document.querySelectorAll('a').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+  });
+
+  (function animate() {
+    curX += (mouseX - curX) * 0.32;
+    curY += (mouseY - curY) * 0.32;
+    cursor.style.transform = `translate(${curX}px, ${curY}px)`;
+    requestAnimationFrame(animate);
+  })();
+</script>
 </body>
 </html>
