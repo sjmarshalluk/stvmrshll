@@ -663,10 +663,7 @@ font-family: var(--font-mono);
     padding: 0 1.5rem;
 }
 
-.col-left header {
-    padding-left: 0;
-    padding-right: 0;
-}
+
 
 .col-left .intro {
     margin-top: 2rem;
