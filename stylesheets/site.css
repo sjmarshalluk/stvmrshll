@@ -162,6 +162,10 @@ p.intro {
     padding: 1rem 3rem 1rem 1rem;
 }
 
+.section-text p.intro {
+    padding: 0;
+}
+
 /* Refined List Styles */
 ul, ol {
     margin-bottom: 1.5rem;
@@ -263,6 +267,9 @@ header {
     height: 60px;
     padding: 1rem;
     margin-bottom: 1.5rem;
+}
+header.sub {
+    padding: 1rem 2.5rem;
 }
 
 header p {
