@@ -177,6 +177,11 @@ p.intro {
     font-size: 2rem;
     line-height: 1.4;
     padding: 1rem 3rem 1rem 1rem;
+    transition: opacity 0.15s ease;
+}
+
+p.intro.fading {
+    opacity: 0;
 }
 
 .contact {
@@ -303,18 +308,17 @@ a:hover {
 
 header {
     height: 60px;
-    padding: 1rem;
+    padding: 2rem 0 1rem 1rem;
     margin-bottom: 1.5rem;
 }
 header.sub {
-    padding: 1rem 2.5rem;
+    padding: 2rem 2.5rem;
 }
 
 header p {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 500;
-    line-height: 60px;
     margin: 0;
     color: var(--text-primary);
     z-index: 10;
@@ -396,8 +400,24 @@ header p span.tagline {
     transform: translateY(-4px); /* Subtle movement */
 }
 
+.case-study-images {
+    margin: 2rem 0;
+}
+
 .case-study-images img {
     width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.img-caption {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    background: #ebebeb;
+    padding: 0.6rem 0.9rem;
+    border-radius: 6px;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.5;
 }
 
 .cs-grid {
@@ -724,8 +744,62 @@ font-family: var(--font-mono);
     border-left: 1px solid var(--accent-line);
 }
 
-.col-right {
-    /* Case studies column */
+/* --- Tab switch --- */
+.section-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg-color);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 2rem 0 1rem 0rem;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    transition: color 0.15s ease;
+}
+
+.tab-btn.active {
+    color: var(--text-primary);
+}
+
+.tab-btn:hover:not(.active) {
+    color: var(--text-secondary);
+}
+
+.tab-sep {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-line);
+}
+
+.tab-panel {
+    animation: tabFade 0.2s ease;
+}
+
+.tab-panel[hidden] {
+    display: none;
+}
+
+.tab-empty {
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-top: 2rem;
+}
+
+@keyframes tabFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Case study page: sectioned layout */
@@ -1058,7 +1132,7 @@ ul.meta {
     content: "•";
     position: absolute;
     right: -0.25rem;
-    color: var(--text-tertiary);
+    color: var(--highlight-color);
     font-weight: 400;
 }
 
