@@ -184,6 +184,14 @@ p.intro.fading {
     opacity: 0;
 }
 
+p.notice {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin-left: 1rem;
+    font-family: var(--font-mono);
+    max-width: 60%;
+}
+
 .contact {
     margin: 1rem 3rem 0rem 1rem;
 
